@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 15:57:48
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-10-26 16:33:44
+ * @LastEditTime: 2021-10-26 17:04:48
  */
 import axios from 'axios'
 import env from "@/api/env";
@@ -20,7 +20,8 @@ function sign(config){
  * 对返回的数据进行拦截处理函数
  */
 function responseFn(response){
-  return response
+  
+  return response.data
 }
 /**
  * 返回报错时进行数据拦击处理

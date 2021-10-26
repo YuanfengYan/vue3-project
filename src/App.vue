@@ -1,20 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div id="root">
+    <router-view/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import {loginApi} from './api/user'
+
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
   created(){
-    loginApi().then(res=>{
-      console.log('loginApi',res)
-    })
+    
   }
 }
 </script>

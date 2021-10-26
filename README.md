@@ -6,7 +6,7 @@
 
 + 创建项目 vue create my-project
 
-+ 安装项目依赖 npm i element-ui axios mockjs
++ 安装项目依赖 npm i element-ui axios mockjs 等
 
 ## 二、配置http请求
 
@@ -17,3 +17,7 @@
 + 创建api接口文件，按功能模块进行文件命名（一般以后端模块进行分类命名 user.js,order.js）
 
 + 配置mock.js 
+
+## 三、配置页面路由
+
++ 
