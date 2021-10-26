@@ -1,24 +1,19 @@
-# my-project
+# vue3中台框架搭建
 
-## Project setup
-```
-npm install
-```
+## 一、起步
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
++ 安装脚手架 npm install -g @vue/cli
 
-### Compiles and minifies for production
-```
-npm run build
-```
++ 创建项目 vue create my-project
 
-### Lints and fixes files
-```
-npm run lint
-```
++ 安装项目依赖 npm i element-ui axios mockjs
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 二、配置http请求
+
++ axios的请求，响应拦截（配置header头加密，数据跟踪，响应数据格式，异常处理等）
+
++ 配置.env环境变量，（.env不上传git,服务端通过Apollo进行配置线上的环境变量）
+
++ 创建api接口文件，按功能模块进行文件命名（一般以后端模块进行分类命名 user.js,order.js）
+
++ 配置mock.js 

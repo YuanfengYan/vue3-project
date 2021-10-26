@@ -5,11 +5,16 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
+import {loginApi} from './api/user'
 export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  created(){
+    loginApi().then(res=>{
+      console.log('loginApi',res)
+    })
   }
 }
 </script>
