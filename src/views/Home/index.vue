@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-10-26 18:45:10
+ * @LastEditTime: 2021-10-27 15:35:30
 -->
 <template>
   <div>home - {{name}}</div>
@@ -12,7 +12,7 @@
 
 </style>
 <script>
-import {loginApi} from '@/api/user'
+
 export default {
   data(){
     return {
@@ -21,9 +21,7 @@ export default {
   },
   created(){
     console.log('loginApi')
-    loginApi().then(res=>{
-      console.log('loginApi',res)
-    })
+    
   }
 }
 </script>

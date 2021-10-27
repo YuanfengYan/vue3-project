@@ -1,17 +1,17 @@
 <template>
-<div id="root">
-    <router-view/>
-  </div>
+  <router-view></router-view>
 </template>
 
-<script>
+<script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import HelloWorld from './components/HelloWorld.vue';
 
-export default {
-  name: 'App',
-  created(){
-    
-  }
-}
+@Options({
+  components: {
+    HelloWorld,
+  },
+})
+export default class App extends Vue {}
 </script>
 
 <style>
