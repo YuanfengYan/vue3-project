@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-12 15:25:39
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-11-19 18:30:07
+ * @LastEditTime: 2021-11-30 16:12:08
  */
 
 import { createStore, Store } from "vuex"
@@ -37,6 +37,8 @@ export const store = createStore<RootStateTypes>({
 })
 
 export const key: InjectionKey<Store<RootStateTypes>> = Symbol('vue-store')
+
+export default store
 
 
 

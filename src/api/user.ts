@@ -3,14 +3,14 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 15:56:50
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-11-29 11:16:22
+ * @LastEditTime: 2021-11-30 18:05:23
  */
 import Http from "@/api/http";
-export const loginApi = (data:any)=>{
+export const loginApi = async (data:any)=>{
   // if (loginRSA) {
   //   data = await encryptedData(data)
   // }
-  return Http.post("/v1/user/login", data);
+  return  Http.post("/v1/user/login", data);
 }
 
 export const getUserInfo = (accessToken:any)=>{

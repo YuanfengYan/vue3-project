@@ -53,8 +53,9 @@ const UserModule: Module<UserState, RootStateTypes> = {
         },
         // 登录
         async login({ commit }, userInfo) {
-          const { data } = await loginApi(userInfo)
-          const accessToken = data[tokenName]
+          const data  = await loginApi(userInfo)
+          console.log(data)
+          const accessToken =  data[tokenName]
           if (accessToken) {
             commit('setAccessToken', accessToken)
             const hour = new Date().getHours()
@@ -68,7 +69,6 @@ const UserModule: Module<UserState, RootStateTypes> = {
                 : hour < 18
                 ? '下午好'
                 : '晚上好'
-                console.log(thisTime)
             // Vue.prototype.$baseNotify(`欢迎登录${title}`, `${thisTime}！`)
           } else {
             console.log(`登录接口异常，未正确返回${tokenName}...`)

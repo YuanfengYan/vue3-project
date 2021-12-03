@@ -10,6 +10,10 @@ import './mock'
 // vuex
 import {store} from '@/store'
 
+// 权限permission
+
+import "@/router/permission"
+
 
 
 const app = createApp(App)

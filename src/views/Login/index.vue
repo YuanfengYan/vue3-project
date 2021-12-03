@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-10-27 17:17:23
+ * @LastEditTime: 2021-12-03 16:06:29
 -->
 <template>
     <div class="login">
@@ -37,9 +37,9 @@
 </style>
 <script lang="ts">
 
-import { ElMessage } from 'element-plus'
+// import { ElMessage } from 'element-plus'
 import { defineComponent } from 'vue';
-import { loginApi } from '@/api/user';
+// import { loginApi } from '@/api/user';
 
 export default defineComponent({
     data() {
@@ -59,6 +59,7 @@ export default defineComponent({
                 name: [{ validator: validateEmpty, trigger: 'blur' }],
                 pass: [{ validator: validateEmpty, trigger: 'blur' }],
             },
+            redirect:""
         };
     },
     methods: {
@@ -66,24 +67,36 @@ export default defineComponent({
             let el: any = this.$refs[formName];
             el.validate((valid: boolean) => {
                 if (valid) {
-                    loginApi({
-                      name:this.ruleForm.name,
-                      pass:this.ruleForm.pass,
-                    }).then((res) => {
-                      if(res){
-                        ElMessage({
-                          message: '登陆成功',
-                          type: 'success',
-                        })
-                        this.$router.push('/home')
-                      }
-                    });
+                  this.$store.dispatch('user/login', this.ruleForm).then(()=>{
+                    console.log('xxxx')
+                    this.$router.push('/home').catch(() => {})
+                  })
+                    // loginApi({
+                    //   name:this.ruleForm.name,
+                    //   pass:this.ruleForm.pass,
+                    // }).then((res) => {
+                    //   if(res){
+                    //     ElMessage({
+                    //       message: '登陆成功',
+                    //       type: 'success',
+                    //     })
+                    //     this.$router.push('/home')
+                    //   }
+                    // });
                 } else {
                     console.log('error submit!!');
                     return false;
                 }
             });
         },
+    },
+    watch: {
+      $route: {
+        handler(route) {
+          this.redirect = (route.query && route.query.redirect) || '/'
+        },
+        immediate: true,
+      },
     },
     setup() {},
 });

@@ -50,6 +50,7 @@ function hasPermission(permissions:[], route:any) {
  */
 export function filterAsyncRoutes(routes:any[], permissions:[]) {
   const finallyRoutes:any[] = []
+  console.log('routes',routes)
   routes.forEach((route) => {
     const item = {...route}
     if (hasPermission(permissions, item)) {

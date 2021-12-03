@@ -35,7 +35,7 @@
   //加载时显示文字
   loadingText: '正在加载中...',
   //token名称
-  tokenName: 'accessToken',
+  tokenName: 'token',
   //token在localStorage、sessionStorage存储的key的名称
   tokenTableName: 'vue-admin-beautiful-2021',
   //token存储位置localStorage sessionStorage

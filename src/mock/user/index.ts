@@ -3,10 +3,10 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-27 16:36:42
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-11-29 11:18:20
+ * @LastEditTime: 2021-11-30 18:02:05
  */
 import Mock from "mockjs"
-function loginByUsername(data:any){
+function  loginByUsername (data:any){
 
   const params:any = JSON.parse(data.body)
   
@@ -15,6 +15,7 @@ function loginByUsername(data:any){
       token:'admintoken',
       user_id:1,
       name:'管理员'
+      
     }
   }else{
     return null

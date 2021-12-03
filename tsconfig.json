@@ -10,6 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,//在封装axios请求根据error.response.status取自己定义的索引值时，提示警告类型为 “any“ 的表达式不能用于索引类型
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
