@@ -3,22 +3,22 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-03 14:56:43
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-11-12 15:17:16
+ * @LastEditTime: 2021-12-13 15:54:03
 -->
 <template>
     <div class="slide" >
-        <el-menu
+        <MenuNav></MenuNav>
+        <!-- <el-menu
           default-active="1"
-          class="el-menu-vertical-demo"
+          class="menu"
+          mode="vertical"
         >
-          <el-sub-menu v-for="(item,index) in menus" :key="index"  :index="index" >
+          <el-sub-menu v-for="(item,index) in [1,2,3]" :key="index"  :index="index" >
             <template #title>
-              <span>item</span>
+              <span>item1</span>
             </template>
-            <el-menu-item-group title="Group One">
-              <el-menu-item index="1-1">item one</el-menu-item>
-              <el-menu-item index="1-2">item one</el-menu-item>
-            </el-menu-item-group>
+            <el-menu-item index="1-1">item one</el-menu-item>
+            <el-menu-item index="1-2">item one</el-menu-item>
             <el-menu-item-group title="Group Two">
               <el-menu-item index="1-3">item three</el-menu-item>
             </el-menu-item-group>
@@ -27,7 +27,7 @@
               <el-menu-item index="1-4-1">item one</el-menu-item>
             </el-sub-menu>
           </el-sub-menu>
-        </el-menu>
+        </el-menu> -->
 
     </div>
 </template>
@@ -40,11 +40,14 @@
 }
 </style>
 <script lang="ts">
-// import {ref} from "vue"
-// import ModalDemo from "@/components/Modal/ModalDemo/ModalDemo.vue"
+
+import MenuNav from "@/components/MenuNav/index.vue"
 export default {
   components:{
-    
+    MenuNav
+  },
+  computed:{
+   
   },
   props:{
     menus:{
@@ -58,6 +61,9 @@ export default {
     return {
       showflag:true,
     }
+  },
+  mounted(){
+    console.log(this)
   },
   methods:{
     

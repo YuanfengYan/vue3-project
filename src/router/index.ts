@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-11-29 10:31:36
+ * @LastEditTime: 2021-12-13 19:41:14
  */
 import {
   createRouter,
@@ -58,9 +58,11 @@ export const asyncRoutes = [
     ],
   },
   { 
+    
     path: '/exp',
     component: Layout,
     redirect: 'noRedirect',
+    alwaysShow: true,
     meta: { title: '配置', icon: 'users-cog', permissions: ['admin'] },
     children: [
       {
@@ -69,7 +71,17 @@ export const asyncRoutes = [
         component: () => import('@/views/Example/Permissions/index.vue'),
         meta: {
           title: '权限分配',
-          icon: 'home',
+          icon: 'permission',
+          affix: true,
+        },
+      },
+      {
+        path: 'earth',
+        name: 'earth',
+        component: () => import('@/views/Example/Earth/index.vue'),
+        meta: {
+          title: 'Cesium地球',
+          icon: 'earth',
           affix: true,
         },
       },

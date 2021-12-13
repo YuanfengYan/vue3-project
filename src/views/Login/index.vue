@@ -3,9 +3,10 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-03 16:06:29
+ * @LastEditTime: 2021-12-13 14:51:09
 -->
 <template>
+<div class="pagewarp">
     <div class="login">
         <el-form
             ref="ruleForm"
@@ -31,6 +32,7 @@
             </el-form-item>
         </el-form>
     </div>
+</div>
 </template>
 <style lang="scss" >
 @import "./style.scss";

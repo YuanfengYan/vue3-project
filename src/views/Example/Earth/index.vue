@@ -3,11 +3,11 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-10 17:52:11
+ * @LastEditTime: 2021-12-13 15:00:04
 -->
 <template>
-    <div class="cc">
-      12
+    <div class="pagewarp">
+      地球
     </div>
 </template>
 <style lang="scss" >
