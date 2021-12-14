@@ -3,9 +3,16 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-27 15:17:39
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-10-27 15:34:09
+ * @LastEditTime: 2021-12-14 19:28:32
  */
 const path = require("path");
+
+// const debug = process.env.NODE_ENV !== 'production'
+// // use CesiumUnminified when debug
+// const cesiumSource = debug
+//   ? './node_modules/cesium/Build/CesiumUnminified'
+//   : './node_modules/cesium/Build/Cesium'
+
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -20,4 +27,15 @@ module.exports = {
         // .set("base", resolve("baseConfig"))
         // .set("public", resolve("public"));
   },
+  configureWebpack:{
+      module: {
+          rules: [
+              {
+                  test: /\.mjs$/,
+                  include: /node_modules/,
+                  type: "javascript/auto"
+              },
+          ]
+      }
+  }
 }

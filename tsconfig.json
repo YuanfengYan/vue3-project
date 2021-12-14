@@ -14,7 +14,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "vue-cesium/Cesium"
     ],
     "paths": {
       "@/*": [
@@ -26,7 +27,8 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+
   },
   "include": [
     "src/**/*.ts",
@@ -37,5 +39,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+ 
 }

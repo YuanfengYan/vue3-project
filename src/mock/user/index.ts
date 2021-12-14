@@ -3,9 +3,12 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-27 16:36:42
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-11-30 18:02:05
+ * @LastEditTime: 2021-12-14 20:49:28
  */
-import Mock from "mockjs"
+// @ts-ignore
+import Mock from "../mockchanged.js"
+
+// @ts-ignore
 function  loginByUsername (data:any){
 
   const params:any = JSON.parse(data.body)

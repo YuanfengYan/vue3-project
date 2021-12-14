@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-13 19:41:14
+ * @LastEditTime: 2021-12-14 20:20:00
  */
 import {
   createRouter,
@@ -35,6 +35,12 @@ export const constRoutes = [
     path: '/404',
     name: '404',
     component: () => import('@/views/404.vue'),
+    hidden: true,
+  },
+  {
+    path: '/ViewDemo',
+    name: 'ViewDemo',
+    component: () => import('@/views/ViewDemo/index.vue'),
     hidden: true,
   },
 ]
