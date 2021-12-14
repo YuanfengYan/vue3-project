@@ -6,11 +6,12 @@
  * @LastEditTime: 2021-12-13 20:18:38
 -->
 <template>
-     <component v-if="!item.hidden" :is="menuComponent" :item="item" :child="routeChildren">
+     <component v-if="!item.hidden"  :base-path="basePath" :is="menuComponent" :item="item"  :child="routeChildren">
          <template v-if="item.children && item.children.length">
           <WarpMenu
             v-for="route in item.children"
             :key="route.path"
+            :base-path="handlePath(item)"
             :item="route"
           />
         </template>
@@ -20,6 +21,7 @@
 @import "./style.scss";
 </style>
 <script lang="ts">
+import path from 'path'
 import SubMenu from "@/components/MenuNav/components/SubMenu/index.vue"
 import ItemMenu from "@/components/MenuNav/components/ItemMenu/index.vue"
 
@@ -34,6 +36,7 @@ interface Item {
   notShowChildren?:boolean;
   alwaysShow?:boolean
 }
+
 // import { loginApi } from '@/api/user';
 export default defineComponent({
 
@@ -45,6 +48,11 @@ export default defineComponent({
         };
     },
     props:{
+      basePath:{
+        type: String,
+        required:true,
+        default:'/'
+      },
       item:{
         type: Object as PropType<Item>,
         required:true
@@ -100,12 +108,17 @@ export default defineComponent({
         }
         return false
       },
+      handlePath(route:Item){
+        // console.log('handlePath-this.basePath',this.basePath)
+        // console.log('handlePath',path.resolve(this.basePath,route.path))
+        return path.resolve(this.basePath,route.path)
+      }
     },
     created(){
 
     },
     mounted(){
-      console.log(this.item)
+      // console.log('this.basePath',this.basePath)
     },
     unmounted(){
 

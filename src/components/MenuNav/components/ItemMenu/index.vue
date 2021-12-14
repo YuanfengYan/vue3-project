@@ -13,7 +13,7 @@
  * @LastEditTime: 2021-12-13 15:44:13
 -->
 <template>
-     <el-menu-item :index="child" @click="handleLink">
+     <el-menu-item :index="child.path" @click="handleLink">
         <span>{{ child?.meta?.title }}</span>
      </el-menu-item>
 </template>
@@ -23,6 +23,7 @@
 <script lang="ts">
 
 // import { ElMessage } from 'element-plus'
+import path from 'path'
 import { defineComponent, PropType } from 'vue';
 interface Item {
   path: string;
@@ -43,13 +44,21 @@ export default defineComponent({
         type: Object as PropType<Item>,
         required:true
       },
+      basePath:{
+        type: String,
+        required:true
+      },
     },
     computed:{
  
     },
     methods: {
       handleLink(){
-        console.log(this.child)
+        // console.log(this.child.path)
+        // console.log('this.basePath',this.basePath)
+        let goPage = path.resolve(this.basePath, this.child.path)
+        // console.log(goPage)
+        this.$router.push(goPage)
       }
     },
     created(){

@@ -38,6 +38,10 @@ export default defineComponent({
         type: Object as PropType<Item>,
         required:true
       },
+      basePath:{
+        type: String,
+        required:true
+      },
     },
     components:{
     },
@@ -50,7 +54,7 @@ export default defineComponent({
 
     },
     mounted(){
-      console.log('sub',this.item)
+      // console.log('sub',this.item)
 
     },
     unmounted(){
