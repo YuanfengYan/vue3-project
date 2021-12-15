@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 15:57:48
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-10-27 14:45:42
+ * @LastEditTime: 2021-12-15 15:51:58
  */
 import axios from 'axios'
 import env from "@/api/env";
@@ -29,7 +29,7 @@ function responseFn(response:any){
  * @returns 
  */
 function responseErrorFn(error:any){
-  console.log('responseErrorFn',error)
+  console.error('responseErrorFn',error)
   return error
 }
 

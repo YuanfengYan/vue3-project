@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-12 15:25:39
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-11-30 16:12:08
+ * @LastEditTime: 2021-12-15 15:51:53
  */
 
 import { createStore, Store } from "vuex"
@@ -12,7 +12,7 @@ import {RootStateTypes} from './interface'
 
 
 const files = require.context('./modules', false, /\.ts$/)
-console.log('files',files.keys())
+// console.log('files',files.keys())
 const modules:any = {}
 files.keys().forEach((key:string) => {
   modules[key.replace(/(\.\/|\.ts)/g, '')] = files(key).default
@@ -20,7 +20,7 @@ files.keys().forEach((key:string) => {
 Object.keys(modules).forEach((key) => {
   modules[key]['namespaced'] = true
 })
-console.log(modules)
+// console.log(modules)
 // 创建一个新的 store 实例
 export const store = createStore<RootStateTypes>({
   state: {

@@ -9,7 +9,7 @@ router.beforeEach(async(to, from, next) => {
     if(to.path == '/login'){
       next({ path: '/' })
     }else{
-      console.log(to)
+      // console.log(to)
       const hasPermissions =
       store.getters['user/permissions'] &&
       store.getters['user/permissions'].length > 0
@@ -19,7 +19,7 @@ router.beforeEach(async(to, from, next) => {
       }else{
         const permissions = await store.dispatch('user/getUserInfo');
         const accessRoutes = await store.dispatch('router/setRoutes', permissions)
-        console.log(accessRoutes,permissions)
+        // console.log(accessRoutes,permissions)
         accessRoutes.forEach((item:any) => {
           router.addRoute(item)
         })

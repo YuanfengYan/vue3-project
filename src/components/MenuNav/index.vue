@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-10 10:47:13
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-13 20:05:40
+ * @LastEditTime: 2021-12-15 14:28:09
 -->
 <template>
     <el-menu
@@ -11,7 +11,7 @@
     :collapse="isCollapse"
     >
       <template v-for="item in routes" :key="item.path" >
-        <Warp-Menu :item="item" :index="item.path"></Warp-Menu>
+        <Warp-Menu :item="item" :base-path="item.path" :index="item.path"></Warp-Menu>
       </template>
     </el-menu>
 </template>

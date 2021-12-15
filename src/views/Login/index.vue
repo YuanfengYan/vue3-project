@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-13 14:51:09
+ * @LastEditTime: 2021-12-15 15:52:27
 -->
 <template>
 <div class="pagewarp">
@@ -70,7 +70,7 @@ export default defineComponent({
             el.validate((valid: boolean) => {
                 if (valid) {
                   this.$store.dispatch('user/login', this.ruleForm).then(()=>{
-                    console.log('xxxx')
+
                     this.$router.push('/home').catch(() => {})
                   })
                     // loginApi({

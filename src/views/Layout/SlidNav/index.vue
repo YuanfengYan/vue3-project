@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-03 14:56:43
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-13 15:54:03
+ * @LastEditTime: 2021-12-15 15:52:21
 -->
 <template>
     <div class="slide" >
@@ -63,7 +63,7 @@ export default {
     }
   },
   mounted(){
-    console.log(this)
+    // console.log(this)
   },
   methods:{
     

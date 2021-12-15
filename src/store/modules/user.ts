@@ -54,7 +54,7 @@ const UserModule: Module<UserState, RootStateTypes> = {
         // 登录
         async login({ commit }, userInfo) {
           const data  = await loginApi(userInfo)
-          console.log(data)
+          // console.log(data)
           const accessToken =  data[tokenName]
           if (accessToken) {
             commit('setAccessToken', accessToken)
