@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-10 10:47:13
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-15 14:28:09
+ * @LastEditTime: 2021-12-16 10:16:26
 -->
 <template>
     <el-menu
@@ -30,7 +30,7 @@ export default defineComponent({
         };
     },
     props:{
-      // 是否展开菜单
+      // 是否折叠菜单
       isCollapse:{
         type: Boolean,
         default: false

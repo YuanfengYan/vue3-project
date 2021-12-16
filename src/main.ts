@@ -7,6 +7,9 @@ import 'vue-cesium/dist/index.css'
 // ui框架
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+// 引入icon
+import * as ElIconModules from '@element-plus/icons'
+
 // mock数据
 import './mock'
 
@@ -17,6 +20,13 @@ import {store} from '@/store'
 import "@/router/permission"
 
 const app = createApp(App)
+// 统一注册Icon图标
+for (const iconName in ElIconModules) {
+  if (Reflect.has(ElIconModules, iconName)) {
+    const item = ElIconModules[iconName]
+    app.component(iconName, item)
+  }
+}
 app.use(VueCesium,{
   // cesiumPath: "./Cesium/Cesium.js",
   // accessToken:

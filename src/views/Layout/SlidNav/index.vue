@@ -3,32 +3,11 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-03 14:56:43
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-15 15:52:21
+ * @LastEditTime: 2021-12-16 15:06:00
 -->
 <template>
     <div class="slide" >
-        <MenuNav></MenuNav>
-        <!-- <el-menu
-          default-active="1"
-          class="menu"
-          mode="vertical"
-        >
-          <el-sub-menu v-for="(item,index) in [1,2,3]" :key="index"  :index="index" >
-            <template #title>
-              <span>item1</span>
-            </template>
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="1-4">
-              <template #title>item four</template>
-              <el-menu-item index="1-4-1">item one</el-menu-item>
-            </el-sub-menu>
-          </el-sub-menu>
-        </el-menu> -->
-
+        <MenuNav :isCollapse="isCollapse"></MenuNav>
     </div>
 </template>
 <style lang="scss" >
@@ -36,7 +15,7 @@
 .slide{
   width: 100%;
   height: 100%;
-  background: #99ffff;
+  background: #f5f7fa;
 }
 </style>
 <script lang="ts">
@@ -50,20 +29,16 @@ export default {
    
   },
   props:{
-    menus:{
-      type: Array,
-      default:()=>{
-        return [1,2,3]
-      }
+    isCollapse:{
+      type: Boolean,
+      default:false,
     }
   },
   data(){
     return {
-      showflag:true,
     }
   },
   mounted(){
-    // console.log(this)
   },
   methods:{
     

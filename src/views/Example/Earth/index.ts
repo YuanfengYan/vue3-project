@@ -13,6 +13,7 @@ const SETTING = {
   //聚合图标
   POINTCOLLECT: "https://aharesource-bucket.ahaschool.com.cn/earth/2021/08/04/610a36d935c52cYQaUA4zYA_w_44_h_56.png",
 }
+let CurrentLevel: number = 1
 export default defineComponent({
   data() {
     return {
@@ -38,22 +39,23 @@ export default defineComponent({
         const promise: Promise<any> = Cesium.GeoJsonDataSource.load(res, { markerSize: 40, markerColor: Cesium.Color.BLACK })
         promise.then((dataSource: Cesium.GeoJsonDataSource) => {
           // 设置聚合规则
-          dataSource.clustering.enabled = true
-          dataSource.clustering.pixelRange = 60
-          dataSource.clustering.minimumClusterSize = 4  //可以聚类的最小屏幕空间对象数。
-          dataSource.clustering.clusterEvent.addEventListener((entities, cluster) => {
-            cluster.label.show = false
-            cluster.billboard.show = true
-            cluster.billboard.image = SETTING.POINTCOLLECT
-            cluster.billboard.scale = 0.4;
-            // cluster.label.scaleByDistance =  new Cesium.NearFarScalar(3000000, 1, SETTING.MAXIMUMZOOMDISTANCE, 0.1)
-          })
+          // dataSource.clustering.enabled = true
+          // dataSource.clustering.clusterBillboards = true
+          // dataSource.clustering.pixelRange = 60
+          // dataSource.clustering.minimumClusterSize = 4  //可以聚类的最小屏幕空间对象数。
+          // dataSource.clustering.clusterEvent.addEventListener((entities, cluster) => {
+          //   // cluster.label.show = false
+          //   cluster.billboard.show = true
+          //   cluster.billboard.image = SETTING.POINTCOLLECT
+          //   cluster.billboard.scale = 0.4;
+          // })
           const entities = dataSource.entities.values;
-          // console.log(entities)
+          console.log(entities[0])
           for (let i = 0; i < entities.length; i++) {
             const entity: any = entities[i];
             entity.billboard.image = SETTING.POINTNORMAL
             entity.billboard.scale = 0.2;
+            entity.billboard.distanceDisplayCondition = new Cesium.DistanceDisplayCondition(41,  CesiumSdk.levelToHeight(entity.properties.level));
             // entity.billboard.scaleByDistance = new Cesium.NearFarScalar(3000000, 1, SETTING.MAXIMUMZOOMDISTANCE, 0.1);
           }
           window['viewer'].dataSources.add(dataSource);
@@ -61,6 +63,7 @@ export default defineComponent({
         })
       })
     },
+
     /**
      * 飞到指定地点
      */
@@ -96,6 +99,17 @@ export default defineComponent({
           })
         }
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+      // 相机移动监听事件
+      window['viewer'].camera.changed.addEventListener(()=>{
+        const center = CesiumSdk.getCurrentCartesian3({
+          viewer:  window['viewer'],
+          cesium: window['cesium']
+        });
+        CurrentLevel = CesiumSdk.heightToLevel(center.height)
+        console.log('当前高度层级',CurrentLevel)
+
+     })
     },
   },
   created() {

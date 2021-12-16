@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-12-15 10:16:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-15 19:21:36
+ * @LastEditTime: 2021-12-16 16:48:58
  */
 // @ts-nocheck
 import Mock from "../mockchanged.js"
@@ -12,7 +12,7 @@ import Mock from "../mockchanged.js"
 function  allpoivs (){
   return Mock.mock({
     "type": "FeatureCollection",
-    "features|100":[{
+    "features|1000":[{
       "type":"Feature",
       "geometry": {
         "type": "Point", 
@@ -20,7 +20,8 @@ function  allpoivs (){
       },
       "properties": {
         "name": "@ctitle(1,5)",
-        "height|10000-100000": 1
+        "height|1000-100000": 1,
+        "level|4-20":1,//最低显示层级
       }}
     ]
   })
@@ -34,7 +35,7 @@ function  allpoivs (){
       "height": 0,
       "poiv_height|0-12742000": 1,
       "level|0-21": 1,
-      // "minLevel": minLevel, //提前一个层级显示
+      // "minLevel": minLevel, //
       // "no_neighborhood_level": item.no_neighborhood_level
     },
     "id|+1": 1,
