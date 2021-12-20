@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-12 10:31:54
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-14 14:17:33
+ * @LastEditTime: 2021-12-20 16:20:00
  */
 
 import app from '../main'
@@ -46,28 +46,31 @@ export default {
    * @param {*} src
    * @param {*} callback
    */
-   loadScript: function(src:string, callback:Function) {
-    const script: HTMLScriptElement = document.createElement("script");
-    const head: HTMLHeadElement = document.getElementsByTagName("head")[0];
-    script.type = "text/javascript";
-    script.charset = "UTF-8";
-    script.src = src;
-    if (script.addEventListener) {
-      script.addEventListener(
-        "load",
-        function() {
-          callback();
-        },
-        false
-      );
-    } else if(script['attachEvent']){
-      script['attachEvent']("onreadystatechange", function() {
-        const target = window.event?.srcElement;
-        if (target&&target['readyState'] == "loaded") {
-          callback();
-        }
-      });
-    }
-    head.appendChild(script);
+   loadScript: function(src:string):Promise<void> {
+     return new Promise((resolve,reject)=>{
+       const script: HTMLScriptElement = document.createElement("script");
+       const head: HTMLHeadElement = document.getElementsByTagName("head")[0];
+       script.type = "text/javascript";
+       script.charset = "UTF-8";
+       script.src = src;
+       console.log('loadScript')
+       if (script.addEventListener) {
+         script.addEventListener(
+           "load",
+           function() {
+            resolve();
+           },
+           false
+         );
+       } else if(script['attachEvent']){
+         script['attachEvent']("onreadystatechange", function() {
+           const target = window.event?.srcElement;
+           if (target&&target['readyState'] == "loaded") {
+            resolve();
+           }
+         });
+       }
+       head.appendChild(script);
+     })
   },
 }

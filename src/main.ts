@@ -28,9 +28,9 @@ for (const iconName in ElIconModules) {
   }
 }
 app.use(VueCesium,{
-  // cesiumPath: "./Cesium/Cesium.js",
-  // accessToken:
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZmFiZjQxYS0xNjk0LTQ4MjEtYjFiNy02OGFlYjdhMTQxMDkiLCJpZCI6NTgyODQsImlhdCI6MTYyMzA2NTI0NH0.Wsji8RvxIbzVjlJfDuaw2jh5a_yHmNXUhBZNQAr2HkA"
+  cesiumPath: "./Cesium/Cesium.js",
+  accessToken:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZmFiZjQxYS0xNjk0LTQ4MjEtYjFiNy02OGFlYjdhMTQxMDkiLCJpZCI6NTgyODQsImlhdCI6MTYyMzA2NTI0NH0.Wsji8RvxIbzVjlJfDuaw2jh5a_yHmNXUhBZNQAr2HkA"
 }).use(store).use(ElementPlus).use(VueRouter).mount('#app')
 
 // @ts-ignore
