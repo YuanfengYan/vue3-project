@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-16 14:34:53
+ * @LastEditTime: 2021-12-21 15:01:52
  */
 import {
   createRouter,
@@ -69,7 +69,7 @@ export const asyncRoutes = [
     component: Layout,
     redirect: 'noRedirect',
     alwaysShow: true,
-    meta: { title: '配置', icon: 'platform', permissions: ['admin'] },
+    meta: { title: 'Demo', icon: 'platform', permissions: ['admin'] },
     children: [
       {
         path: 'permissions',
@@ -88,6 +88,16 @@ export const asyncRoutes = [
         meta: {
           title: 'Cesium地球',
           icon: 'location',
+          affix: true,
+        },
+      },
+      {
+        path: 'book',
+        name: 'book',
+        component: () => import('@/views/Example/Book/index.vue'),
+        meta: {
+          title: '增删改查',
+          icon: 'list',
           affix: true,
         },
       },

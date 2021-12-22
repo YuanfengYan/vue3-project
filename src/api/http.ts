@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 15:57:48
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-15 15:51:58
+ * @LastEditTime: 2021-12-21 11:38:22
  */
 import axios from 'axios'
 import env from "@/api/env";
@@ -50,7 +50,7 @@ function responseErrorFn(error:any){
     * @param query
     * @returns {*}
     */
-   get(url:string, query = {}) {
+   get (url:string, query = {}) {
      const _url = `${url}`;
      return axios.get(_url, { params: query });
    },

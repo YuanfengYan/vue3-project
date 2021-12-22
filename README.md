@@ -1,4 +1,10 @@
-# vue3中台框架搭建
+  启动
+
+  - npm install
+
+  - npm run serve
+
+# vue3中台框架搭建历程
 
 ## 一、起步
 
