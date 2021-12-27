@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-12-15 10:16:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-20 15:53:32
+ * @LastEditTime: 2021-12-24 17:56:31
  */
 // @ts-nocheck
 import Mock from "../mockchanged.js"
@@ -98,3 +98,28 @@ function  allpoivs (level:number){
   // })
 }
 Mock.mock(/\/v1\/earth\/allpoivs/, 'get', allpoivs)
+
+interface point{
+  longitude: number,
+  latitude: number,
+  height?: number,
+}
+Mock.mock(/\/v1\/earth\/poivpath/, 'post', function (data:any):{list:point[]} {
+  const params:any = JSON.parse(data.body)
+  // const arr = new Array(params.count).fill('')
+  // arr.map(item=>{
+  //   item = Mock.mock({
+  //     'longitude': '@float(-180,180)',
+  //     'latitude': '@float(-180,180)',
+  //     'height|1-10000': 1,
+  //   })
+  // })
+  // console.log('arr',arr)
+
+  return Mock.mock({
+  [`list|${params.count}`]:[{
+    'longitude': '@float(0,90)',
+    'latitude': '@float(-30,30)',
+    'height|1-10000': 1,
+  }]})
+})

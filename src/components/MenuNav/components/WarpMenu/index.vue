@@ -6,123 +6,123 @@
  * @LastEditTime: 2021-12-13 20:18:38
 -->
 <template>
-     <component v-if="!item.hidden"  :base-path="basePath" :is="menuComponent" :item="item"  :child="routeChildren">
-         <template v-if="item.children && item.children.length">
-          <WarpMenu
-            v-for="route in item.children"
-            :key="route.path"
-            :base-path="handlePath(item)"
-            :item="route"
-          />
-        </template>
-      </component>
+  <component
+    v-if="!item.hidden"
+    :base-path="basePath"
+    :is="menuComponent"
+    :item="item"
+    :child="routeChildren"
+  >
+    <template v-if="item.children && item.children.length">
+      <WarpMenu
+        v-for="route in item.children"
+        :key="route.path"
+        :base-path="handlePath(item)"
+        :item="route"
+      />
+    </template>
+  </component>
 </template>
-<style lang="scss" >
+<style lang="scss">
 @import "./style.scss";
 </style>
 <script lang="ts">
-import path from 'path'
-import SubMenu from "@/components/MenuNav/components/SubMenu/index.vue"
-import ItemMenu from "@/components/MenuNav/components/ItemMenu/index.vue"
+import path from "path";
+import SubMenu from "@/components/MenuNav/components/SubMenu/index.vue";
+import ItemMenu from "@/components/MenuNav/components/ItemMenu/index.vue";
 
 // import { ElMessage } from 'element-plus'
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType } from "vue";
 interface Item {
   path: string;
   title: string;
   hidden: boolean;
-  meta:any;
-  children?:Item[];
-  notShowChildren?:boolean;
-  alwaysShow?:boolean
+  meta: any;
+  children?: Item[];
+  notShowChildren?: boolean;
+  alwaysShow?: boolean;
 }
 
 // import { loginApi } from '@/api/user';
 export default defineComponent({
+  name: "WarpMenu",
 
-    name:"WarpMenu",
-
-    data() {
-        return {
-          routeChildren:null as Item | null,
-        };
+  data() {
+    return {
+      routeChildren: null as Item | null,
+    };
+  },
+  props: {
+    basePath: {
+      type: String,
+      required: true,
+      default: "/",
     },
-    props:{
-      basePath:{
-        type: String,
-        required:true,
-        default:'/'
-      },
-      item:{
-        type: Object as PropType<Item>,
-        required:true
+    item: {
+      type: Object as PropType<Item>,
+      required: true,
+    },
+  },
+
+  components: {
+    SubMenu,
+    ItemMenu,
+  },
+
+  computed: {
+    // 计算组件类型是显示ItemMenu (不含子集或只显示有且只有一个子集且子集再无子集) 、SubMenu (含有子集且要显示)
+    menuComponent() {
+      if (
+        this.handleChildren(this.item.children, this.item) &&
+        (!this.routeChildren?.children || this.routeChildren?.notShowChildren) &&
+        !this.item.alwaysShow
+      ) {
+        return "ItemMenu";
+      } else {
+        return "SubMenu";
       }
     },
-
-    components:{
-      SubMenu,
-      ItemMenu
-    },
-
-    computed:{
-      // 计算组件类型是显示ItemMenu (不含子集或只显示有且只有一个子集且子集再无子集) 、SubMenu (含有子集且要显示)
-      menuComponent() {
-        if (
-          this.handleChildren(this.item.children, this.item) &&
-          (!this.routeChildren?.children ||
-            this.routeChildren?.notShowChildren) &&
-          !this.item.alwaysShow
-        ) {
-          return 'ItemMenu'
+  },
+  methods: {
+    // 返回是true 有且不止一个子集需要显示  ，否则返回false
+    // routeChildren 在后续中有用的(当有且仅有一个子集需要显示时)
+    handleChildren(children: Item[] = [], parent: Item) {
+      // @ts-ignore
+      //  debugger
+      if (children === null) children = [];
+      const showChildren = children.filter((item: Item) => {
+        if (item.hidden) {
+          return false;
         } else {
-          return 'SubMenu'
+          this.routeChildren = item;
+          return true;
         }
-      },
-    },
-    methods: {
-      // 返回是true 有且不止一个子集需要显示  ，否则返回false
-      // routeChildren 在后续中有用的(当有且仅有一个子集需要显示时)
-       handleChildren(children:Item[] = [], parent:Item) {
-        // @ts-ignore
-        //  debugger
-        if (children === null) children = []
-        const showChildren = children.filter((item:Item) => {
-          if (item.hidden) {
-            return false
-          } else {
-             this.routeChildren = item
-            return true
-          }
-        })
-        if (showChildren.length === 1) {
-          return true
-        }
-
-        if (showChildren.length === 0) {
-          this.routeChildren = {
-            ...parent,
-            // path: '',
-            notShowChildren: true,
-          }
-          return true
-        }
-        return false
-      },
-      handlePath(route:Item){
-        // console.log('handlePath-this.basePath',this.basePath)
-        // console.log('handlePath',path.resolve(this.basePath,route.path))
-        return path.resolve(this.basePath,route.path)
+      });
+      if (showChildren.length === 1) {
+        return true;
       }
-    },
-    created(){
 
+      if (showChildren.length === 0) {
+        this.routeChildren = {
+          ...parent,
+          // path: '',
+          notShowChildren: true,
+        };
+        return true;
+      }
+      return false;
     },
-    mounted(){
-      // console.log('this.basePath',this.basePath)
+    handlePath(route: Item) {
+      // console.log('handlePath-this.basePath',this.basePath)
+      // console.log('handlePath',path.resolve(this.basePath,route.path))
+      return path.resolve(this.basePath, route.path);
     },
-    unmounted(){
-
-    },
-    setup() {},
+  },
+  created() {},
+  mounted() {
+    // console.log('this.basePath',this.basePath)
+  },
+  unmounted() {},
+  setup() {},
 });
 </script>

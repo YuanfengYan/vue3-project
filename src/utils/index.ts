@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-11-12 10:31:54
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-20 16:20:00
+ * @LastEditTime: 2021-12-27 16:10:31
  */
 
 import app from '../main'
@@ -73,4 +73,17 @@ export default {
        head.appendChild(script);
      })
   },
+  /**
+ * [dateAddDays 从某个日期增加n天后的日期]
+ * @param  {[string]} dateStr  [日期字符串]
+ * @param  {[int]} dayCount [增加的天数]
+ * @return {[string]}[增加n天后的日期字符串]
+ */
+ dateAddDays(dateStr:string,dayCount:number) {
+  const tempDate=new Date(dateStr.replace(/-/g,"/")).getTime();//把日期字符串转换成日期格式
+  const resultDate=new Date((tempDate/1000+(86400*dayCount))*1000);//增加n天后的日期
+  const resultDateStr=resultDate.getFullYear()+"-"+(resultDate.getMonth()+1)+"-"+(resultDate.getDate());//将日期转化为字符串格式
+  return resultDateStr;
+}
+
 }
