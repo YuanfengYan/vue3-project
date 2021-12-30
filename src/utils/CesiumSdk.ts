@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-12-15 19:06:46
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-24 11:08:21
+ * @LastEditTime: 2021-12-29 15:33:15
  */
 export default {
   /**
@@ -266,6 +266,11 @@ export default {
       window['viewer'].camera.flyTo({
         destination: Cesium.Cartesian3.fromDegrees(Number(geo.longitude), Number(geo.latitude), geo.height),
         duration: 2,
+      //   orientation: {
+      //     heading : Cesium.Math.toRadians(0.0), // 方向
+      //     pitch : Cesium.Math.toRadians(-40.0),// 倾斜角度
+      //     roll : 0
+      // },
         complete: function () {
           resolve()
         },
@@ -310,5 +315,17 @@ export default {
             return (360 - c1.longitude - c2.longitude)
           }
         }
-  }
+  },
+  /**
+   * 获取当前可视区域的经纬度
+   */
+  getCurrentViewRect: function() {
+    const rect = window['viewer'].camera.computeViewRectangle();
+    return {
+      east: (rect.east / Math.PI) * 180,
+      north: (rect.north / Math.PI) * 180,
+      south: (rect.south / Math.PI) * 180,
+      west: (rect.west / Math.PI) * 180
+    };
+  },
 }

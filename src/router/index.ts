@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-21 15:01:52
+ * @LastEditTime: 2021-12-30 16:15:02
  */
 import {
   createRouter,
@@ -97,6 +97,16 @@ export const asyncRoutes = [
         component: () => import('@/views/Example/Book/index.vue'),
         meta: {
           title: '增删改查',
+          icon: 'list',
+          affix: true,
+        },
+      },
+      {
+        path: 'websocket',
+        name: 'websocket',
+        component: () => import('@/views/Example/Websocket/index.vue'),
+        meta: {
+          title: 'Websocket',
           icon: 'list',
           affix: true,
         },

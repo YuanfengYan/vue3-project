@@ -1,0 +1,14 @@
+{
+  "name": "websocketserve",
+  "version": "1.0.0",
+  "description": "nodeserve",
+  "main": "index.js",
+  "scripts": {
+    "websocketServe": "node ./websocketServe/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodejs-websocket": "^1.7.2"
+  }
+}

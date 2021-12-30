@@ -1,0 +1,25 @@
+.websocketWarp{
+  .tool{
+    margin: 10px ;
+  }
+  .chatWarp{
+    width: 350px;
+    height: 622px;
+    background-image: url('./imgs/chatBg.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    .msgInput{
+      padding:  10px;
+      box-sizing: border-box;
+      position: absolute;
+      background: white;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+    }
+  }
+  .desBox{
+    width: 400px;
+  }
+}

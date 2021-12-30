@@ -337,6 +337,18 @@ export default defineComponent({
       // new Cesium.Event().addEventListener(window['viewer'].clock.onStop,(e:any)=>{
       //   console.log('xxx',e)
       // })
+    },
+    changeViewPitch(){
+      // const rect = CesiumSdk.getCurrentViewRect();
+      window['viewer'].camera.setView({
+        destination :Cesium.Cartesian3.fromDegrees(this.homeLocation.longitude, this.homeLocation.latitude, 10000000),
+        orientation: {
+            heading : Cesium.Math.toRadians(0.0), // 方向
+            pitch : Cesium.Math.toRadians(-60.0),// 倾斜角度
+            roll : 0
+        },
+        convert:false
+    });
     }
   
   },
