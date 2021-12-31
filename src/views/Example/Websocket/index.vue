@@ -3,20 +3,26 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-30 20:56:21
+ * @LastEditTime: 2021-12-31 16:40:00
 -->
 <template>
     <div class="websocketWarp">
       <el-row class="tool">
-        <el-button type="primary" @click="connectChat">连接客服</el-button>
+        <el-button type="primary" v-if="!connectStatus" @click="connectChat">连接客服</el-button>
+        <el-button type="danger" v-else @click="unConnectChat">断开连接</el-button>
       </el-row>
       <el-row>
         <el-col :span="12">
           <div class="chatWarp">
             <div class="chatContent">
-              <div class="msgList" v-for="(item,index) in msgList" :key="index">
-                <div class="msg">
-                  {{item.text}}--{{item.fromType}}
+              <div class="msgList" >
+                <div class="message" v-for="(item,index) in msgList" :key="index">
+                  <div class="tip" v-if="item.fromType == 3">
+                    {{item.text}}
+                  </div>
+                  <div v-else :class="'msg msg'+item.fromType">
+                   {{item.text}}
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,6 +55,7 @@
 <script lang="ts">
 import EventPubSub from '@/utils/EventPubSub'
 import Socket from "@/utils/Websocket";
+import WSCONF from '@/config/WebsocketConf'
 import { ElMessage } from 'element-plus'
 const pubSub =  EventPubSub.getInstance();
 const WS = Socket.getInstance()
@@ -56,7 +63,8 @@ import { defineComponent } from 'vue';
 /* eslint-disable */
 const enum FromType {
   DISTAL = 1,//远端客服
-  USER = 2//本地用户
+  USER = 2,//本地用户
+  TIP = 3//通知信息
 }
 /* eslint-enable */
 interface MsgItem {
@@ -66,29 +74,51 @@ interface MsgItem {
 interface IData {
   sendValue:string,
   msgList:MsgItem[],
+  connectStatus:boolean,
   [propName: string]: any
 }
 export default defineComponent({
     data() :IData{
         return {
           sendValue:'',
-          msgList:[],
+          msgList:[{
+            text:'大大所大所大所撒大所大所多耍大刀多多--1大大所大所大所撒大所大所多耍大刀多多--1',
+            fromType:1
+          },{
+            text:'111',
+            fromType:2
+          }],
+          connectStatus: false,
         }
     },
     methods: {
       initEvent(){
         const that = this
-        pubSub.on('WEBSCOCKET_MSG',(e:any)=>{
+        pubSub.on(WSCONF.WEBSCOCKET_MSG,(e:any)=>{
           console.log('ee',e.data, that.msgList)
           that.msgList.push({
             text: e.data as string,
             fromType:FromType.DISTAL
           })
         })
+        pubSub.on(WSCONF.WEBSOCKET_CONNECT_SUCC,()=>{
+          that.connectStatus = true
+           this.msgList.push({
+            text: '已成功连接远程客服',
+            fromType:FromType.TIP
+          })
+        })
       },
       connectChat(){
          WS.startConnect()
-         this.initEvent()
+      },
+      unConnectChat(){
+        pubSub.emit(WSCONF.WEBSCOCKET_UNCONECT)
+        this.msgList.push({
+            text: '已断开远程连接',
+            fromType:FromType.TIP
+          })
+        this.connectStatus = false
       },
       sendUserMsg(){
         console.log(this.sendValue)
@@ -100,7 +130,7 @@ export default defineComponent({
             fromType:FromType.USER
           })
           this.sendValue = ''
-           pubSub.emit('WEBSCOCKET_SEND_MSG',msg)
+           pubSub.emit(WSCONF.WEBSCOCKET_SEND_MSG,msg)
         }else{
             ElMessage({
               message: '消息不能为空',
@@ -113,7 +143,7 @@ export default defineComponent({
 
     },
     mounted(){
-
+      this.initEvent()
     },
     unmounted(){
 

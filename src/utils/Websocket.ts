@@ -1,4 +1,5 @@
 import EventPubSub from '@/utils/EventPubSub'
+import WSCONF from '@/config/WebsocketConf'
 const pubSub =  EventPubSub.getInstance();
 const URL_WS = 'ws://localhost:3001'
 let webSocket:WebSocket
@@ -9,6 +10,7 @@ type HeartCheck = {
   reset:{():void},
   start:{():void},
 }
+
 export default class Socket {
      /**
      * 单例
@@ -21,11 +23,23 @@ export default class Socket {
           return this.instance;
       }
     constructor(name?:string) {
-      
+      this.initPubEvent()
     }
     startConnect(){
         webSocket = new WebSocket(URL_WS);
         this.initEventHandle()
+    }
+    initPubEvent(){
+      // 用户发送消息
+      pubSub.on(WSCONF.WEBSCOCKET_SEND_MSG,(msg:any)=>{
+        console.log('发送消息')
+        webSocket.send(msg)
+      })
+      // 主动断开连接
+      pubSub.on(WSCONF.WEBSCOCKET_UNCONECT,(msg:any)=>{
+        console.log('发送消息')
+        webSocket.close()
+      })
     }
     /**
      * 初始化事件
@@ -65,11 +79,7 @@ export default class Socket {
         }.bind(this)
         webSocket.onopen = function(event) {
             console.log('onopen,websocket连接成功')
-            pubSub.emit('WEBSOCKET_CONNECT_SUCC')
-            pubSub.on('WEBSCOCKET_SEND_MSG',(msg:any)=>{
-              webSocket.send(msg)
-            })
-            
+            pubSub.emit(WSCONF.WEBSOCKET_CONNECT_SUCC)
             heartCheck.start();
         }
         webSocket.onmessage = function(event:any) {
@@ -79,18 +89,8 @@ export default class Socket {
                 console.log('连接心跳')
                 return 
             }else{
-              pubSub.emit('WEBSCOCKET_MSG',event)
+              pubSub.emit(WSCONF.WEBSCOCKET_MSG,event)
             }
-            
-            // console.log('data',JSON.parse(event.data))
-            // try{
-            //     this.poivsBuffer.push(JSON.parse(event.data))
-            // }catch(err){
-            //     console.warn('Websocket收到的JSON数据解析错误',err)
-            // }
-            // if(!this.isShoutFlag){
-            //     pubSub.emit('WEBSOCKET_SHOT')
-            // }
         }
     }
     // 重连
@@ -98,6 +98,9 @@ export default class Socket {
         setTimeout(()=>{     //没连接上会一直重连，设置延迟避免请求过多
             this.startConnect();
         }, 2000);
+    }
+    unConnect(){
+      webSocket.close()
     }
     
 }
