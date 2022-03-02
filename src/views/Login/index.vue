@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-15 15:52:27
+ * @LastEditTime: 2022-01-01 13:53:42
 -->
 <template>
 <div class="pagewarp">
@@ -34,7 +34,7 @@
     </div>
 </div>
 </template>
-<style lang="scss" >
+<style lang="scss" scoped>
 @import "./style.scss";
 </style>
 <script lang="ts">

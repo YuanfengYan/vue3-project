@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-30 16:15:02
+ * @LastEditTime: 2022-03-02 20:51:37
  */
 import {
   createRouter,
@@ -111,6 +111,26 @@ export const asyncRoutes = [
           affix: true,
         },
       },
+    ],
+  },
+  { 
+    
+    path: '/test',
+    component: Layout,
+    redirect: 'noRedirect',
+    alwaysShow: true,
+    meta: { title: '测试', icon: 'platform', permissions: ['admin'] },
+    children: [
+      {
+        path: 'permissions',
+        name: 'permissions',
+        component: () => import('@/views/Vue3test/index.vue'),
+        meta: {
+          title: 'vue3api',
+          icon: 'lock',
+          affix: true,
+        },
+      }
     ],
   }
 ];
