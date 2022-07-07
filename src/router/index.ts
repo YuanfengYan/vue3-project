@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-03-02 20:51:37
+ * @LastEditTime: 2022-07-07 11:30:02
  */
 import {
   createRouter,
@@ -111,6 +111,16 @@ export const asyncRoutes = [
           affix: true,
         },
       },
+      {
+        path: 'svgAvatar',
+        name: 'svgAvatar',
+        component: () => import('@/views/Example/SvgAvatar/index.vue'),
+        meta: {
+          title: 'SvgAvatar',
+          icon: 'list',
+          affix: true,
+        },
+      },
     ],
   },
   { 
@@ -120,17 +130,36 @@ export const asyncRoutes = [
     redirect: 'noRedirect',
     alwaysShow: true,
     meta: { title: '测试', icon: 'platform', permissions: ['admin'] },
-    children: [
-      {
-        path: 'permissions',
-        name: 'permissions',
-        component: () => import('@/views/Vue3test/index.vue'),
+    children: [{
+        path: 'test1',
+        name: 'test1',
+        component: () => import('@/views/Vue3test/test1/index.vue'),
         meta: {
-          title: 'vue3api',
+          title: 'vueTest1',
           icon: 'lock',
           affix: true,
-        },
-      }
+        }
+      },
+      {
+          path: 'test2',
+          name: 'test2',
+          component: () => import('@/views/Vue3test/test2/index.vue'),
+          meta: {
+            title: 'vueTest2',
+            icon: 'lock',
+            affix: true,
+          }
+      },
+      {
+        path: 'othertest',
+        name: 'othertest',
+        component: () => import('@/views/Vue3test/OtherTest/index.vue'),
+        meta: {
+          title: 'other Test',
+          icon: 'lock',
+          affix: true,
+        }
+    }
     ],
   }
 ];
