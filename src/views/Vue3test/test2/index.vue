@@ -3,10 +3,10 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-07-07 15:11:54
+ * @LastEditTime: 2022-07-07 16:51:27
 -->
 <template>
-    <div    v-bind="{colore : 'xxx',id:'123'}" id="11" class="22">
+    <div class="">
       <div>我是toal:{{toal}}</div>
       <div>我是price:{{product.price}}</div>
     </div>
