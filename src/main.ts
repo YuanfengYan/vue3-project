@@ -19,6 +19,10 @@ import {store} from '@/store'
 // // 权限permission
 import "@/router/permission"
 
+// 自定义插件
+import MyDrag from "@/plugins/drag"
+
+
 const app = createApp(App)
 // 统一注册Icon图标
 for (const iconName in ElIconModules) {
@@ -27,6 +31,8 @@ for (const iconName in ElIconModules) {
     app.component(iconName, item)
   }
 }
+// @ts-ignore
+app.use(MyDrag)
 app.use(VueCesium,{
   cesiumPath: "./Cesium/Cesium.js",
   accessToken:

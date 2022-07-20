@@ -1,0 +1,21 @@
+.box{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+.box-card{
+  width: 480px;
+  border-radius: 10px;
+  margin: 10px;
+  color: #000;
+  background: #ccc ;
+  position: relative;
+  height: 100px;
+}
+
+.drag{
+  position: absolute;
+  top:50px;
+  left: 0;
+}
