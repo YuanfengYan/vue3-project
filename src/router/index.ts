@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-07-07 11:30:02
+ * @LastEditTime: 2022-07-21 16:46:42
  */
 import {
   createRouter,
@@ -117,6 +117,16 @@ export const asyncRoutes = [
         component: () => import('@/views/Example/SvgAvatar/index.vue'),
         meta: {
           title: 'SvgAvatar',
+          icon: 'list',
+          affix: true,
+        },
+      },
+      {
+        path: 'GSAP',
+        name: 'GSAP',
+        component: () => import('@/views/Example/GSAP/index.vue'),
+        meta: {
+          title: 'GSAP',
           icon: 'list',
           affix: true,
         },

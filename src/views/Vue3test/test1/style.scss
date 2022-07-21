@@ -16,6 +16,8 @@
   border-radius: 10px;
   margin: 10px;
   color: #fff;
+  display: inline-block;
+  vertical-align: top;
   // background: rgba(random(255), random(255), random(255), 0.8) ;
 }
 @for $i from 1 through 30 {
@@ -23,3 +25,51 @@
     background: rgba(random(255), random(255), random(255), 0.8) ;
   }
 }
+.warp{
+  background-color: #ccc;
+}
+// 自定义过渡
+
+.transContent{
+  background-color: red;
+  height: 100px;
+  position: relative;
+}
+.mytrans-enter-active,
+.mytrans-leave-active {
+  transition: all 1s ease;
+}
+.mytrans-enter-from,
+.mytrans-leave-to{
+  opacity: 0;
+  left: 100%;
+
+}
+.mytrans-enter-to,
+.mytrans-leave-from{
+  opacity: 1;
+  left: 0; 
+}
+
+// 需要注意的是使用 FLIP 过渡的元素不能设置为 display: inline。作为替代方案，可以设置为 display: inline-block 或者将元素放置于 flex 布局中。
+
+
+.list-item{
+  display: inline-block;
+  margin-right: 10px;
+  transition: all 2s ease; //本身因为其他变化导致变化
+}
+.mytransList-enter-active,
+.mytransList-leave-active {//
+  transition: all 0.4s ease;
+}
+.mytransList-enter-from,
+.mytransList-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.mytransList-leave-active {
+  position: absolute;
+}
+
+
