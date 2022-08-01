@@ -47,6 +47,8 @@ export default defineComponent({
         latitude: 29.5198,
         height: 10000,
       },
+      mapStyle:'Aerial',
+      mapstyleList:["Aerial","AerialWithLabels","AerialWithLabelsOnDemand","CanvasDark","CanvasGray","CanvasLight","CollinsBart","OrdnanceSurvey","Road","RoadOnDemand"]
 
     }
   },
@@ -355,7 +357,10 @@ export default defineComponent({
   created() {
 
   },
-  mounted() { },
+  mounted() { 
+    // this.$alert(222)
+    console.log(this)
+  },
   unmounted() { },
   setup() { },
 });

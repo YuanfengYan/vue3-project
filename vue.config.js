@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-27 15:17:39
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-15 15:30:46
+ * @LastEditTime: 2022-07-28 17:09:36
  */
 const path = require("path");
 
@@ -19,6 +19,7 @@ function resolve(dir) {
 
 module.exports = {
   chainWebpack: config => {
+    console.log(config,'config')
     config.resolve.alias
         .set("@", resolve("src"))
         .set("assets", resolve("src/assets"))

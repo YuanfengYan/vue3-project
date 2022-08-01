@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-29 15:41:02
+ * @LastEditTime: 2022-07-28 17:53:57
 -->
 <template>
   <div class="pagewarp">
@@ -30,13 +30,21 @@
         </div>
         <template #reference>
           <el-button type="primary" @click="showPathConf = true">生成曲型路线</el-button>
-          
         </template>
       </el-popover>
-      <el-button type="danger"  v-else @click="unBindPath">清除路线</el-button>
-      
+      <el-button type="danger"  v-else @click="unBindPath">清除路线</el-button>  
       <el-button type="primary" v-if="hasPath"   @click="startmove">单步执行人物</el-button>
+
       <el-button type="primary"    @click="changeViewPitch">切换角度</el-button>
+
+       <el-select v-model="mapStyle" class="m-2" placeholder="Select" size="large">
+        <el-option
+          v-for="item in mapstyleList"
+          :key="item"
+          :label="item"
+          :value="item"
+        />
+      </el-select>
       <!-- <el-button type="primary" @click="unBindPoivs">两点生成曲线</el-button> -->
     </el-row>
     <el-row> </el-row>
@@ -80,7 +88,7 @@
           <vc-provider-imagery-bingmaps
             ref="provider"
             bmKey="AvLX3xcNvMZeLeAPq33u8kObVKu6mArl8VprMjyt8M2HSQiZp1meCVW3XTfCauZf"
-            mapStyle="Aerial"
+            :mapStyle="mapStyle"
             tileProtocol="https"
           ></vc-provider-imagery-bingmaps>
         </vc-layer-imagery>

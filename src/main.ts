@@ -31,6 +31,8 @@ for (const iconName in ElIconModules) {
     app.component(iconName, item)
   }
 }
+app.config.compilerOptions.delimiters = ['${', '}']    
+app.provide('user', 'administrator')
 // @ts-ignore
 app.use(MyDrag)
 app.use(VueCesium,{

@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2021-12-22 13:42:08
+ * @LastEditTime: 2022-07-29 16:02:54
 -->
 <template>
 
@@ -20,14 +20,14 @@
                     <el-button
                         type="text"
                         size="small"
-                        @click.prevent="deleteRow(scope.$index, tableData)"
+                        @click.prevent="deleteRow(scope, list)"
                     >
                         删除
                     </el-button>
                     <el-button
                         type="text"
                         size="small"
-                        @click.prevent="editRow(scope.$index, tableData)"
+                        @click.prevent="editRow(scope, tableData)"
                     >
                         编辑
                     </el-button>
@@ -49,24 +49,29 @@ export default defineComponent({
         return {};
     },
     methods: {
-      deleteRow(){
-
-      },
-      editRow(){
+      deleteRow(item:any,table:any){
+        console.log(item)
+        table.splice(item.$index,1)
         
+      },
+      editRow(item:any){
+         console.log(item)
+        item.row.des='des'
+        this.changeList()
       }
     },
     created() {},
     mounted() {},
     unmounted() {},
     setup() {
-       const { list, getBooks } = books()
+       const { list, getBooks,changeList } = books()
        onMounted(()=>{
          getBooks()
        })
        return {
          list,
-         getBooks
+         getBooks,
+         changeList
        }
     },
 });
