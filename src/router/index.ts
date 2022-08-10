@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-07-21 16:46:42
+ * @LastEditTime: 2022-08-10 14:34:27
  */
 import {
   createRouter,
@@ -166,6 +166,16 @@ export const asyncRoutes = [
         component: () => import('@/views/Vue3test/OtherTest/index.vue'),
         meta: {
           title: 'other Test',
+          icon: 'lock',
+          affix: true,
+        }
+    },
+      {
+        path: 'Hoc',
+        name: 'Hoc',
+        component: () => import('@/views/Vue3test/Hoc/index.vue'),
+        meta: {
+          title: 'Hoc高阶组件',
           icon: 'lock',
           affix: true,
         }
