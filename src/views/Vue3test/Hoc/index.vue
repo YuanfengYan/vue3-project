@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-08-10 20:02:21
+ * @LastEditTime: 2022-08-30 17:59:29
 -->
 // @ts-noCheck
 <template>
@@ -25,8 +25,8 @@
 </style>
 <script lang="ts">
 import { gethocInfo } from '@/api/other';
-import hoc from './HocBase/index'
-import Base from './Base/index.vue'
+import hoc from './HocBase/HocBase'
+import Base from './Base/Base.vue'
 import { defineComponent } from 'vue';
 const BaseWarp = hoc(Base,gethocInfo)
 export default defineComponent({

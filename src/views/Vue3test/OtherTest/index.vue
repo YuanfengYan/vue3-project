@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-08-01 18:43:04
+ * @LastEditTime: 2022-08-31 10:12:09
 -->
 <template>
     <div class="box">
@@ -24,6 +24,7 @@
      <div class="box-card">
       cssmodule
        <div :class="classes.rr">red{{classes}}</div>
+       <div class="box1"><span :class="classes.bluef">blue</span></div>
      </div>
      <div class="box-card" @click="changData">
       renderTracked{{age}}
@@ -42,6 +43,12 @@
 <style  module="classes">
 .rr{
   color:red
+ 
+}
+.box1{
+}
+.bluef{
+  color:blue
 }
 </style>
 <script lang="ts">
@@ -50,7 +57,7 @@ interface Data {
 }
 
 import Example from "@/views/Vue3test/OtherTest/decorator"
-import { reactive,toRaw,version,markRaw} from 'vue'
+import { reactive,toRaw,version,markRaw,onUpdated} from 'vue'
 // import { toRaw} from '@vue/reactivity'
 // const HelloWorld2:any = defineComponent(function HelloWorld2() {
 //   // const count = ref(11)
@@ -112,7 +119,9 @@ methods:{
   setup() {
      let example = new Example()
      console.log(example)
-      
+    onUpdated(()=>{
+      console.log("父组件更新了")
+    })
      example.a()
      example.a()
      example.a()
@@ -138,7 +147,7 @@ methods:{
      const changtoRaw = function(){
        obj2.person.age+= '1'//toRaw
       obj1.person.age+= '1'//markRaw
-
+      obj1.addr+='2'//reactive
       obj2.info['phone']+= "Y"
       console.log(obj2)
     }

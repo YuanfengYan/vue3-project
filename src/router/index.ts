@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:09:25
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-08-10 14:34:27
+ * @LastEditTime: 2022-08-30 18:06:36
  */
 import {
   createRouter,
@@ -13,7 +13,36 @@ import {
 import LoginPage from "../views/Login/index.vue"
 import HomePage from "../views/Home/index.vue"
 import Layout from "../views/Layout/index.vue"
+const path = require("path")
+interface RouterOption {
+  path:string,
+  name?:string,
+  component:()=>Promise<any>,
+  meta:{
+    title?: string,
+    icon?: string,
+    affix: boolean,
+  }
+}
+const files = require.context('@/views/Vue3test', true, /index\.vue$/)
+const vueDemoChildren:RouterOption[] = []
+files.keys().forEach(path => {
+  const name = path.split('/')[1]
+  vueDemoChildren.push({
+    path: name,
+    name: name,
+    component: () => import('@/views/Vue3test/'+path.substring(2)),
+    meta: {
+      title: name,
+      icon: 'lock',
+      affix: true,
+    }
+  })
+});
 
+
+console.log('files',files.keys())
+console.log('files',files.resolve(files.keys()[0]))
 export const constRoutes = [
   {
     path: '/login',
@@ -140,52 +169,72 @@ export const asyncRoutes = [
     redirect: 'noRedirect',
     alwaysShow: true,
     meta: { title: '测试', icon: 'platform', permissions: ['admin'] },
-    children: [{
-        path: 'test1',
-        name: 'test1',
-        component: () => import('@/views/Vue3test/test1/index.vue'),
-        meta: {
-          title: 'vueTest1',
-          icon: 'lock',
-          affix: true,
-        }
-      },
-      {
-          path: 'test2',
-          name: 'test2',
-          component: () => import('@/views/Vue3test/test2/index.vue'),
-          meta: {
-            title: 'vueTest2',
-            icon: 'lock',
-            affix: true,
-          }
-      },
-      {
-        path: 'othertest',
-        name: 'othertest',
-        component: () => import('@/views/Vue3test/OtherTest/index.vue'),
-        meta: {
-          title: 'other Test',
-          icon: 'lock',
-          affix: true,
-        }
-    },
-      {
-        path: 'Hoc',
-        name: 'Hoc',
-        component: () => import('@/views/Vue3test/Hoc/index.vue'),
-        meta: {
-          title: 'Hoc高阶组件',
-          icon: 'lock',
-          affix: true,
-        }
-    }
-    ],
+    children: vueDemoChildren,
+    // [
+    //   {
+    //     path: 'test1',
+    //     name: 'test1',
+    //     component: () => import('@/views/Vue3test/test1/index.vue'),
+    //     meta: {
+    //       title: 'vueTest1',
+    //       icon: 'lock',
+    //       affix: true,
+    //     }
+    //   },
+    //   {
+    //       path: 'test2',
+    //       name: 'test2',
+    //       component: () => import('@/views/Vue3test/test2/index.vue'),
+    //       meta: {
+    //         title: 'vueTest2',
+    //         icon: 'lock',
+    //         affix: true,
+    //       }
+    //   },
+    //   {
+    //     path: 'othertest',
+    //     name: 'othertest',
+    //     component: () => import('@/views/Vue3test/OtherTest/index.vue'),
+    //     meta: {
+    //       title: 'other Test',
+    //       icon: 'lock',
+    //       affix: true,
+    //     }
+    // },
+    //   {
+    //     path: 'Hoc',
+    //     name: 'Hoc',
+    //     component: () => import('@/views/Vue3test/Hoc/index.vue'),
+    //     meta: {
+    //       title: 'Hoc高阶组件',
+    //       icon: 'lock',
+    //       affix: true,
+    //     }
+    // },
+    //   {
+    //     path: 'Vfor',
+    //     name: 'Vfor',
+    //     component: () => import('@/views/Vue3test/Vfor/index.vue'),
+    //     meta: {
+    //       title: 'Vfor递归组件',
+    //       icon: 'lock',
+    //       affix: true,
+    //     }
+    // },
+    // {
+    //   path: 'VueUse',
+    //   name: 'VueUse',
+    //   component: () => import('@/views/Vue3test/VueUse/index.vue'),
+    //   meta: {
+    //     title: 'VueUse使用',
+    //     icon: 'lock',
+    //     affix: true,
+    //   }
+    // }
+    // ],
   }
 ];
-// const files = require.context('@/views', true, /\.vue$/)
-// console.log('files',files.keys())
-// console.log('files',files.resolve(files.keys()[0]))
+
 // 3. 创建路由实例
 const router =  createRouter({
   history: createWebHashHistory(),

@@ -3,19 +3,20 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-07-29 16:33:52
+ * @LastEditTime: 2022-08-16 15:56:50
 -->
 <template>
   <div class="test1">
     <el-card class="box-card">
       <div class="tip">1、watchEffect:执行时机，使用方法</div>
       <div>我是toal:{{ toal }}</div>
-      <div>我是price:{{ product.price }}</div>
+      <div v-if="cardMsg == 'cardMsg'">我是price:{{ product.price }}</div>
     </el-card>
     <el-card class="box-card">
-      <div class="tip">2、属性绑定：</div>
-      <Card ref="cardref" @click="handleClick" class="xxx" name="12" @myclick="subHandle"></Card>
+      <div class="tip">2、属性绑定：{{cardMsg}}</div>
     </el-card>
+      <Card ref="cardref" @click="handleClick" class="xxx" name="12" @myclick="subHandle"></Card>
+    {{cardMsg}}
 
     <div class="warp">
       <p>Vue内置组件使用</p>
@@ -69,8 +70,8 @@
 </style>
 <script lang="ts">
 import testWacthEffect from "./watchEffect";
-import Card from "./components/card/index.vue";
-import { ref, reactive } from "vue";
+import Card from "./components/card/card.vue";
+import { ref, reactive , onUpdated} from "vue";
 export default {
   data(){
     return{
@@ -86,10 +87,16 @@ export default {
     const { product, toal } = testWacthEffect();
     const showTransFlag = ref(true);
     const cardref = ref()
+    let cardMsg = ref("cardMsg")
+    console.log(cardMsg)
+    setTimeout(()=>{
+      cardMsg.value = "cardMsg改变了" 
+    },5000)
     const handleClick = function () {
       console.log("父组件的clicked");
       console.log(cardref)
       cardref.value.cardCount++
+      cardMsg.value+="cardMsg改变了" 
     };
     const subHandle = function (data: string) {
       console.log("手动子组件的事件通知", data);
@@ -102,6 +109,9 @@ export default {
     const changetransGroup = function () {
       list.splice(0, 1);
     };
+    onUpdated(()=>{
+      console.log("父组件更新了")
+    })
     return {
       product,
       toal,
@@ -112,25 +122,9 @@ export default {
       handleClick,
       subHandle,
       cardref,
+      cardMsg
     };
   },
 };
-// export default defineComponent({
-//     data() {
-//         return {
-//         };
-//     },
-//     methods: {
-//     },
-//     created(){
 
-//     },
-//     mounted(){
-
-//     },
-//     unmounted(){
-
-//     },
-
-// });
 </script>

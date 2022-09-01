@@ -6,7 +6,7 @@
 </div>
 </template>
 <script>
-import {ref,inject} from "vue"
+import {ref,inject, onUpdated} from "vue"
 export default {
   inheritAttrs: false,
   
@@ -17,6 +17,9 @@ export default {
       console.log('子组件click',context)
       context.emit('myclick','通知父组件')
     }
+    onUpdated(()=>{
+      console.log('card子组件更新')
+    })
     // 这个对于通过 r e f s 、 refs、refs、parent 或 $root 访问到的公共实例
     // 如果设置了，只能访问到设置的
     context.expose({

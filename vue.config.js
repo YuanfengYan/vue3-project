@@ -3,10 +3,9 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-27 15:17:39
  * @LastEditors: yanyuanfeng
- * @LastEditTime: 2022-07-28 17:09:36
+ * @LastEditTime: 2022-08-30 15:06:19
  */
 const path = require("path");
-
 // const debug = process.env.NODE_ENV !== 'production'
 // // use CesiumUnminified when debug
 // const cesiumSource = debug
@@ -27,6 +26,15 @@ module.exports = {
         .set("views", resolve("src/views"))
         // .set("base", resolve("baseConfig"))
         // .set("public", resolve("public"));
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap((options) => {
+        return {
+          ...options,
+          reactivityTransform: true
+        }
+      })
   },
   configureWebpack:{
       module: {
