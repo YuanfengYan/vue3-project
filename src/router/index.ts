@@ -170,68 +170,86 @@ export const asyncRoutes = [
     alwaysShow: true,
     meta: { title: '测试', icon: 'platform', permissions: ['admin'] },
     children: vueDemoChildren,
-    // [
-    //   {
-    //     path: 'test1',
-    //     name: 'test1',
-    //     component: () => import('@/views/Vue3test/test1/index.vue'),
-    //     meta: {
-    //       title: 'vueTest1',
-    //       icon: 'lock',
-    //       affix: true,
-    //     }
-    //   },
-    //   {
-    //       path: 'test2',
-    //       name: 'test2',
-    //       component: () => import('@/views/Vue3test/test2/index.vue'),
-    //       meta: {
-    //         title: 'vueTest2',
-    //         icon: 'lock',
-    //         affix: true,
-    //       }
-    //   },
-    //   {
-    //     path: 'othertest',
-    //     name: 'othertest',
-    //     component: () => import('@/views/Vue3test/OtherTest/index.vue'),
-    //     meta: {
-    //       title: 'other Test',
-    //       icon: 'lock',
-    //       affix: true,
-    //     }
-    // },
-    //   {
-    //     path: 'Hoc',
-    //     name: 'Hoc',
-    //     component: () => import('@/views/Vue3test/Hoc/index.vue'),
-    //     meta: {
-    //       title: 'Hoc高阶组件',
-    //       icon: 'lock',
-    //       affix: true,
-    //     }
-    // },
-    //   {
-    //     path: 'Vfor',
-    //     name: 'Vfor',
-    //     component: () => import('@/views/Vue3test/Vfor/index.vue'),
-    //     meta: {
-    //       title: 'Vfor递归组件',
-    //       icon: 'lock',
-    //       affix: true,
-    //     }
-    // },
-    // {
-    //   path: 'VueUse',
-    //   name: 'VueUse',
-    //   component: () => import('@/views/Vue3test/VueUse/index.vue'),
-    //   meta: {
-    //     title: 'VueUse使用',
-    //     icon: 'lock',
-    //     affix: true,
-    //   }
-    // }
-    // ],
+  },
+  {
+    path:'/category',
+    component: Layout,
+    redirect: 'noRedirect',
+    alwaysShow: true,
+    meta: { title: '分类管理', icon: 'platform'},
+    children: [
+      {
+        path: 'index',
+        name: 'categoryIndex',
+        component: () => import('@/views/Category/index.vue'),
+        meta: {
+          title: '分类列表',
+          icon: 'list',
+          affix: true,
+        }
+      },
+      {
+        path: 'create',
+        name: 'categoryCreate',
+        component: () => import('@/views/Category/create.vue'),
+        meta: {
+          title: '创建分类',
+          icon: 'list',
+          affix: true,
+        },
+      },
+      {
+        path: 'edit',
+        name: 'categoryEdit',
+        hidden: true,
+        component: () => import('@/views/Category/edit.vue'),
+        meta: {
+          title: '创建分类',
+          icon: 'list',
+          affix: true,
+        },
+      },
+    ],
+  },
+  {
+    path:'/article',
+    component: Layout,
+    redirect: 'noRedirect',
+    alwaysShow: true,
+    meta: { title: '文章管理', icon: 'platform'},
+    children: [
+      {
+        path: 'index',
+        name: 'articleIndex',
+        component: () => import('@/views/Article/index.vue'),
+        meta: {
+          title: '分类列表',
+          icon: 'list',
+          affix: true,
+        }
+      },
+      {
+        path: 'create',
+        name: 'articleCreate',
+        component: () => import('@/views/Article/create.vue'),
+        meta: {
+          title: '创建文章',
+          icon: 'list',
+          affix: true,
+        },
+      },
+      {
+        path: 'edit',
+        name: 'articleEdit',
+        hidden: true,
+        component: () => import('@/views/Article/edit.vue'),
+        meta: {
+          title: '文章编辑',
+          icon: 'list',
+          affix: true,
+        },
+      },
+    ],
   }
 ];
 

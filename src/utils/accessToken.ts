@@ -2,7 +2,7 @@ import settingConfig  from '@/config/setting.config';
 const {tokenTableName , storage } = settingConfig
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
+ * @author yanyuanfeng 
  * @description 获取accessToken
  * @returns {string|ActiveX.IXMLDOMNode|Promise<any>|any|IDBRequest<any>|MediaKeyStatus|FormDataEntryValue|Function|Promise<Credential | null>}
  */
@@ -21,7 +21,7 @@ export function getAccessToken():string|null {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
+ * @author yanyuanfeng 
  * @description 存储accessToken
  * @param accessToken
  * @returns {void|*}
@@ -41,7 +41,7 @@ export function setAccessToken(accessToken:string) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
+ * @author yanyuanfeng 
  * @description 移除accessToken
  * @returns {void|Promise<void>}
  */

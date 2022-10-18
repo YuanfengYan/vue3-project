@@ -1,5 +1,5 @@
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
+ * @author yanyuanfeng 
  * @description all模式渲染后端返回路由
  * @param constantRoutes
  * @returns {*}
@@ -27,7 +27,7 @@
 // }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
+ * @author yanyuanfeng 
  * @description 判断当前路由是否包含权限
  * @param permissions
  * @param route
@@ -42,7 +42,7 @@ function hasPermission(permissions:[], route:any) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
+ * @author yanyuanfeng 
  * @description intelligence模式根据permissions数组拦截路由
  * @param routes
  * @param permissions

@@ -1,6 +1,7 @@
 import { Module } from "vuex";
 import { RootStateTypes } from "../interface";
 import { getUserInfo, loginApi, logout } from '@/api/user'
+import { getInfo, login as loginApi2 } from '@/api/blog/admin'
 import {
   getAccessToken,
   removeAccessToken,
@@ -53,9 +54,16 @@ const UserModule: Module<UserState, RootStateTypes> = {
         },
         // 登录
         async login({ commit }, userInfo) {
-          const data  = await loginApi(userInfo)
-          // console.log(data)
-          const accessToken =  data[tokenName]
+          // const data  = await loginApi({
+          //   name:'admin',
+          //   pass:'admin'
+          // })
+          const data  = await loginApi2({
+            email:'yanyuanfeng_sspu@163.com',
+            password:'www.14020'
+          })
+          console.log('loginApi',data)
+          const accessToken =  data.data[tokenName]
           if (accessToken) {
             commit('setAccessToken', accessToken)
             const hour = new Date().getHours()

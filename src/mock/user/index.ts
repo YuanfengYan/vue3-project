@@ -42,6 +42,8 @@ Mock.mock(/\/v1\/user\/userInfo/, 'post', (config:any)=>{
         permissions = ['admin', 'editor']
         username = 'test'
       }
+
+      permissions =  ['admin', 'editor'] //写死拥有全部权限
       return {
         code: 200,
         msg: 'success',
