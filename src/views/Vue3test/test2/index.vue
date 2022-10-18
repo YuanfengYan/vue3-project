@@ -3,7 +3,7 @@
  * @Author: yanyuanfeng
  * @Date: 2021-10-26 17:11:07
  * @LastEditors: YuanfengYan yanyuanfeng_sspu@163.com
- * @LastEditTime: 2022-09-02 11:28:00
+ * @LastEditTime: 2022-09-02 18:09:54
 -->
 <template>
   <div class="">
@@ -21,6 +21,8 @@
 import { reactive, ref, watchEffect, nextTick, defineCustomElement } from "vue";
 // import { loginApi } from '@/api/user';
 import { useI18n } from "vue-i18n";
+import { add, loggingIdentity } from "./tsindex";
+
 export default {
   setup() {
     const { locale } = useI18n();
@@ -49,6 +51,12 @@ export default {
     const changeLange = function () {
       locale.value == "en" ? (locale.value = "zh") : (locale.value = "en");
     };
+
+    const fn1 = add;
+    console.log(fn1(1, 1));
+    console.log(fn1("1", "1"));
+    loggingIdentity([]);
+
     return {
       toal,
       product,
