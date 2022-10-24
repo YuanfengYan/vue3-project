@@ -1,7 +1,7 @@
 import { Module } from "vuex";
 import { RootStateTypes } from "../interface";
 import { getUserInfo, loginApi, logout } from '@/api/user'
-import { getInfo, login as loginApi2 } from '@/api/blog/admin'
+import { getInfo, login as loginApi2,getInfo as getUserInfo2 } from '@/api/blog/admin'
 import {
   getAccessToken,
   removeAccessToken,
@@ -16,6 +16,7 @@ export  interface UserState {
   username: string;
   avatar: string;
   permissions: [];
+  userId:number|string;
 }
 
 //Module接收两个泛型  interface Module<S, R>   第一个是当前模块state类型，第二个是全局state类型
@@ -24,6 +25,7 @@ const UserModule: Module<UserState, RootStateTypes> = {
         accessToken: getAccessToken(),
         username: '',
         avatar: '',
+        userId: "",
         permissions: [],
     },
     getters: {
@@ -31,6 +33,7 @@ const UserModule: Module<UserState, RootStateTypes> = {
         username: (state) => state.username,
         avatar: (state) => state.avatar,
         permissions: (state) => state.permissions,
+        userId: (state) => state.userId,
     },
     mutations:{
       setAccessToken(state, accessToken) {
@@ -42,6 +45,9 @@ const UserModule: Module<UserState, RootStateTypes> = {
       },
       setAvatar(state, avatar) {
         state.avatar = avatar
+      },
+      setuserId(state, userId) {
+        state.userId = userId
       },
       setPermissions(state, permissions) {
         state.permissions = permissions
@@ -87,16 +93,19 @@ const UserModule: Module<UserState, RootStateTypes> = {
           }
         },
         async getUserInfo({ commit, state }) {
-          const { data } = await getUserInfo(state.accessToken)
+          const { data } = await getUserInfo2()
           if (!data) {
             // Vue.prototype.$baseMessage('验证失败，请重新登录...', 'error')
             return false
           }
-          const { permissions, username, avatar } = data
-          if (permissions && username && Array.isArray(permissions)) {
+          console.log('eeee',data)
+          const { permissions, nickname,id } = data
+          if (permissions && nickname && Array.isArray(permissions)) {
             commit('setPermissions', permissions)
-            commit('setUsername', username)
-            commit('setAvatar', avatar)
+            commit('setUsername', nickname)
+            // todo 头像
+            commit('setAvatar', 'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif')
+            commit('setuserId', id)
             return permissions
           } else {
             // Vue.prototype.$baseMessage('用户信息接口异常', 'error')

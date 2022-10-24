@@ -212,6 +212,44 @@ export const asyncRoutes = [
     ],
   },
   {
+    path:'/comment',
+    component: Layout,
+    redirect: 'noRedirect',
+    alwaysShow: true,
+    meta: { title: '评论管理', icon: 'platform'},
+    children: [
+      {
+        path: 'index',
+        name: 'commentIndex',
+        component: () => import('@/views/Comment/index.vue'),
+        meta: {
+          title: '用户评论',
+          icon: 'list',
+          affix: true,
+        }
+      }
+    ],
+  },
+  {
+    path:'/reply',
+    component: Layout,
+    redirect: 'noRedirect',
+    alwaysShow: true,
+    meta: { title: '回复管理', icon: 'platform'},
+    children: [
+      {
+        path: 'index',
+        name: 'replyIndex',
+        component: () => import('@/views/Reply/index.vue'),
+        meta: {
+          title: '评论回复',
+          icon: 'list',
+          affix: true,
+        }
+      }
+    ],
+  },
+  {
     path:'/article',
     component: Layout,
     redirect: 'noRedirect',

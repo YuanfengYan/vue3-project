@@ -17,6 +17,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  // "lintOnSave": false,//关闭严格模式
   chainWebpack: config => {
     console.log(config,'config')
     config.resolve.alias

@@ -31,6 +31,13 @@
             :src="ruleForm.img_url"
             class="avatar"
           />
+          <!-- <img
+            v-if="ruleForm.img_url"
+            width="80"
+            height="80"
+            :src="ruleForm.img_url"
+            class="avatar"
+          /> -->
           <i v-else class="el-icon-plus avatar-uploader-icon" />
         </el-upload>
       </el-form-item>
@@ -54,13 +61,14 @@
         <el-input v-model="ruleForm.sort_order" />
       </el-form-item>
       <el-form-item label="内容" prop="content">
-        <mavon-editor
+        <!-- <mavon-editor
           ref="md"
           v-model="ruleForm.content"
           code-style="atom-one-dark"
           @imgAdd="$imgAdd"
           @imgDel="$imgDel"
-        />
+        /> -->
+        <v-md-editor v-model="ruleForm.content" height="400px"></v-md-editor>
       </el-form-item>
 
       <el-form-item>
@@ -87,7 +95,7 @@ export default {
       ruleForm: {
         title: "",
         description: "",
-        img_url: "",
+        img_url: "https://cdn.boblog.com/FiYpNK69ZXxQdjbspW6B6cdkATbF",
         seo_keyword: "",
         status: 1,
         sort_order: 1,
@@ -109,7 +117,7 @@ export default {
   },
   computed: {
     ...mapState({
-      adminInfo: (state) => state.admin.adminInfo,
+      userId: (state) => state.user.userId,
     }),
   },
   mounted() {
@@ -179,8 +187,8 @@ export default {
     },
     // 提交表单
     submitForm(formName) {
-      if (this.adminInfo) {
-        this.ruleForm.admin_id = this.adminInfo.id;
+      if (this.userId) {
+        this.ruleForm.admin_id = this.userId;
       }
 
       this.$refs[formName].validate(async (valid) => {

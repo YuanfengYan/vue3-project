@@ -15,6 +15,20 @@ import 'vue-cesium/dist/index.css'
 // ui框架
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+// @ts-ignore
+import VMdEditor from '@kangc/v-md-editor';
+import '@kangc/v-md-editor/lib/style/base-editor.css';
+
+// @ts-ignore
+import githubTheme from '@kangc/v-md-editor/lib/theme/github';
+import '@kangc/v-md-editor/lib/theme/style/github.css';
+
+// highlightjs
+import hljs from 'highlight.js';
+
+VMdEditor.use(githubTheme, {
+  Hljs: hljs,
+});
 // 引入icon
 import * as ElIconModules from '@element-plus/icons'
 
@@ -46,6 +60,7 @@ app.config.compilerOptions.delimiters = ['${', '}']
 app.provide('user', 'administrator')
 // @ts-ignore
 app.use(MyDrag)
+app.use(VMdEditor)
 app.use(i18n)
 app.use(VueCesium,{
   cesiumPath: "./Cesium/Cesium.js",

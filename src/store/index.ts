@@ -10,7 +10,7 @@ import { createStore, Store } from "vuex"
 import { InjectionKey } from 'vue'
 import {RootStateTypes} from './interface'
 
-
+import getters from './getters'
 const files = require.context('./modules', false, /\.ts$/)
 // console.log('files',files.keys())
 const modules:any = {}
@@ -33,6 +33,8 @@ export const store = createStore<RootStateTypes>({
     }
   },
   modules,
+  getters,
+
 
 })
 

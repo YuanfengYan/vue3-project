@@ -13,72 +13,64 @@
  * @LastEditTime: 2021-12-13 15:44:13
 -->
 <template>
-     <el-menu-item :index="child.path" @click="handleLink">
-        <el-icon class="icon" size="25" ><component :is="child?.meta?.icon"></component></el-icon>
-        <span>{{ child?.meta?.title }}</span>
-     </el-menu-item>
+  <el-menu-item :index="basePath + child.path" @click="handleLink">
+    <el-icon class="icon" size="25"
+      ><component :is="child?.meta?.icon"></component
+    ></el-icon>
+    <span>{{ child?.meta?.title }}</span>
+  </el-menu-item>
 </template>
-<style lang="scss" scoped >
+<style lang="scss" scoped>
 @import "./style.scss";
-.icon{
+.icon {
   margin-bottom: 10px;
   margin-right: 10px;
-  
 }
 </style>
 <script lang="ts">
 // import { Location } from "@element-plus/icons";
 // import { ElMessage } from 'element-plus'
-import path from 'path'
-import { defineComponent, PropType } from 'vue';
+import path from "path";
+import { defineComponent, PropType } from "vue";
 interface Item {
   path: string;
   title: string;
   hidden: boolean;
-  meta:any;
-  children?:Item[];
-  notShowChildren?:boolean;
-  alwaysShow?:boolean
+  meta: any;
+  children?: Item[];
+  notShowChildren?: boolean;
+  alwaysShow?: boolean;
 }
 export default defineComponent({
-    data() {
-        return {
-        };
+  data() {
+    return {};
+  },
+  props: {
+    child: {
+      type: Object as PropType<Item>,
+      required: true,
     },
-    props:{
-       child:{
-        type: Object as PropType<Item>,
-        required:true
-      },
-      basePath:{
-        type: String,
-        required:true
-      },
+    basePath: {
+      type: String,
+      required: true,
     },
-    // components:{
+  },
+  // components:{
 
-    // },
-    computed:{
- 
+  // },
+  computed: {},
+  methods: {
+    handleLink() {
+      // console.log(this.child.path)
+      // console.log('this.basePath',this.basePath)
+      let goPage = path.resolve(this.basePath, this.child.path);
+      // console.log(goPage)
+      this.$router.push(goPage);
     },
-    methods: {
-      handleLink(){
-        // console.log(this.child.path)
-        // console.log('this.basePath',this.basePath)
-        let goPage = path.resolve(this.basePath, this.child.path)
-        // console.log(goPage)
-        this.$router.push(goPage)
-      }
-    },
-    created(){
-
-    },
-    mounted(){
-
-    },
-    unmounted(){
-
-    },
-    setup() {},
+  },
+  created() {},
+  mounted() {},
+  unmounted() {},
+  setup() {},
 });
 </script>

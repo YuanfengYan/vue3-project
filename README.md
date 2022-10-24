@@ -1,3 +1,6 @@
+  ## 项目介绍 
+  node 版本 12
+  
   启动
 
   - npm install
