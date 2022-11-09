@@ -16,38 +16,13 @@
       <el-form-item label="SEO关键字" prop="seo_keyword">
         <el-input v-model="ruleForm.seo_keyword" />
       </el-form-item>
-      <el-form-item label="图片" prop="img_url">
-        <el-upload
-          class="avatar-uploader"
-          action="https://upload-z2.qiniup.com/"
-          :show-file-list="false"
-          :data="{ token }"
-          :on-success="handleUploadSuccess"
-        >
-          <img
-            v-if="ruleForm.img_url"
-            width="80"
-            height="80"
-            :src="ruleForm.img_url"
-            class="avatar"
-          />
-          <!-- <img
-            v-if="ruleForm.img_url"
-            width="80"
-            height="80"
-            :src="ruleForm.img_url"
-            class="avatar"
-          /> -->
-          <i v-else class="el-icon-plus avatar-uploader-icon" />
-        </el-upload>
-      </el-form-item>
       <el-form-item label="展示" prop="status">
         <el-radio-group v-model="ruleForm.status">
           <el-radio :label="1">显示</el-radio>
           <el-radio :label="0">隐藏</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="分类" prop="category_id">
+      <el-form-item label="分类" prop="category_id" class="category">
         <el-select v-model="ruleForm.category_id" placeholder="请选择分类">
           <el-option
             v-for="item in categoryList"
@@ -56,6 +31,13 @@
             :value="item.id"
           />
         </el-select>
+        <img
+          v-if="ruleForm.img_url"
+          width="40"
+          height="40"
+          :src="ruleForm.img_url"
+          class="avatar"
+        />
       </el-form-item>
       <el-form-item label="排序" prop="sort_order">
         <el-input v-model="ruleForm.sort_order" />
@@ -115,6 +97,7 @@ export default {
       },
     };
   },
+
   computed: {
     ...mapState({
       userId: (state) => state.user.userId,
@@ -124,6 +107,14 @@ export default {
     this.$axios = axios.create({ withCredentials: false });
     this.getUploadToken();
     this.getCategoryList();
+  },
+  watch: {
+    "ruleForm.category_id": function name(newval) {
+      if (newval !== "") {
+        let category = this.categoryList.find((item) => item.id == newval);
+        return (this.ruleForm.img_url = category.img);
+      }
+    },
   },
   methods: {
     // 获取上传token
@@ -137,7 +128,7 @@ export default {
     },
     // 上传图片成功回调
     handleUploadSuccess(file) {
-      this.ruleForm.img_url = `https://cdn.boblog.com/${file.key}`;
+      this.ruleForm.img_url = `http://rkrvzzlak.hd-bkt.clouddn.com/${file.key}`;
       this.$message.success("上传成功!");
     },
     // 编辑器删除图片回调
@@ -233,7 +224,7 @@ export default {
   margin: 24px;
 }
 </style>
-<style>
+<style scoped lang="scss">
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -252,9 +243,16 @@ export default {
   line-height: 178px;
   text-align: center;
 }
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
+
+.category {
+  /deep/ .el-form-item__content {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    .avatar {
+      margin-left: 8px;
+    }
+  }
 }
 </style>

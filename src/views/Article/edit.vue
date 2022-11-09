@@ -13,37 +13,18 @@
       <el-form-item label="描述" prop="description">
         <el-input v-model="ruleForm.description" />
       </el-form-item>
-      <el-form-item label="图片" prop="img_url">
-        <el-input v-model="ruleForm.img_url" />
-      </el-form-item>
+
       <el-form-item label="SEO关键字" prop="seo_keyword">
         <el-input v-model="ruleForm.seo_keyword" />
       </el-form-item>
-      <el-form-item label="图片" prop="img_url">
-        <el-upload
-          class="avatar-uploader"
-          action="https://upload-z2.qiniup.com/"
-          :show-file-list="false"
-          :data="{ token }"
-          :on-success="handleUploadSuccess"
-        >
-          <img
-            v-if="ruleForm.img_url"
-            width="80"
-            height="80"
-            :src="ruleForm.img_url"
-            class="avatar"
-          />
-          <i v-else class="el-icon-plus avatar-uploader-icon" />
-        </el-upload>
-      </el-form-item>
+
       <el-form-item label="展示" prop="status">
         <el-radio-group v-model="ruleForm.status">
           <el-radio :label="1">显示</el-radio>
           <el-radio :label="0">隐藏</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="分类" prop="category_id">
+      <el-form-item label="分类" prop="category_id" class="category">
         <el-select v-model="ruleForm.category_id" placeholder="请选择分类">
           <el-option
             v-for="item in categoryList"
@@ -52,18 +33,27 @@
             :value="item.id"
           />
         </el-select>
+        <img
+          v-if="ruleForm.img_url"
+          width="40"
+          height="40"
+          :src="ruleForm.img_url"
+          class="avatar"
+        />
       </el-form-item>
       <el-form-item label="排序" prop="sort_order">
         <el-input v-model="ruleForm.sort_order" />
       </el-form-item>
       <el-form-item label="内容" prop="content">
-        <mavon-editor
+        <v-md-editor v-model="ruleForm.content" height="400px"></v-md-editor>
+
+        <!-- <mavon-editor
           ref="md"
           v-model="ruleForm.content"
           code-style="atom-one-dark"
           @imgAdd="$imgAdd"
           @imgDel="$imgDel"
-        />
+        /> -->
       </el-form-item>
 
       <el-form-item>
@@ -113,8 +103,16 @@ export default {
   },
   computed: {
     ...mapState({
-      adminInfo: (state) => state.admin.adminInfo,
+      userId: (state) => state.user.userId,
     }),
+  },
+  watch: {
+    "ruleForm.category_id": function name(newval) {
+      if (newval !== "" && this.categoryList.length) {
+        let category = this.categoryList.find((item) => item.id == newval);
+        return (this.ruleForm.img_url = category.img);
+      }
+    },
   },
   mounted() {
     this.initData();
@@ -140,7 +138,7 @@ export default {
       try {
         const res = await detail({
           id: this.$route.query.id,
-          is_markdown: false,
+          // is_markdown: false,
         });
         this.ruleForm.title = res.data.title;
         this.ruleForm.description = res.data.description;
@@ -151,8 +149,7 @@ export default {
         this.ruleForm.sort_order = res.data.sort_order;
         this.ruleForm.category_id = res.data.category_info.id;
         this.ruleForm.content = res.data.content;
-        this.ruleForm.admin_id =
-          (this.adminInfo && this.adminInfo.id) || res.data.adminInfo.id;
+        this.ruleForm.admin_id = this.userId;
       } catch (err) {
         console.log(err);
       }
@@ -272,9 +269,15 @@ export default {
   line-height: 178px;
   text-align: center;
 }
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
+.category {
+  /deep/ .el-form-item__content {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    .avatar {
+      margin-left: 8px;
+    }
+  }
 }
 </style>

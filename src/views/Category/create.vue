@@ -13,6 +13,24 @@
       <el-form-item label="排序" prop="sort_order">
         <el-input v-model="ruleForm.sort_order" />
       </el-form-item>
+      <el-form-item label="图片" prop="img">
+        <el-upload
+          class="avatar-uploader"
+          action="https://up-z0.qiniup.com/"
+          :show-file-list="false"
+          :data="{ token }"
+          :on-success="handleUploadSuccess"
+        >
+          <img
+            v-if="ruleForm.img"
+            width="80"
+            height="80"
+            :src="ruleForm.img"
+            class="avatar"
+          />
+          <i v-else class="el-icon-plus avatar-uploader-icon" />
+        </el-upload>
+      </el-form-item>
       <el-form-item>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
         <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -23,23 +41,42 @@
 
 <script>
 import { create } from "@/api/blog/category";
-
+import { getToken } from "@/api/blog/upload";
 export default {
   name: "CategoryCreate",
   data() {
     return {
+      token: "",
       ruleForm: {
         name: "",
         sort_order: "1",
+        img: "",
       },
       rules: {
         name: [{ required: true, message: "请输入分类名称", trigger: "blur" }],
         sort_order: [{ required: true, message: "请输入分类排序", trigger: "blur" }],
+        img: [{ required: true, message: "请上传图片", trigger: "blur" }],
       },
     };
   },
-  mounted() {},
+  mounted() {
+    this.getUploadToken();
+  },
   methods: {
+    // 获取上传token
+    async getUploadToken() {
+      try {
+        const res = await getToken();
+        this.token = res.data.token;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    // 上传图片成功回调
+    handleUploadSuccess(file) {
+      this.ruleForm.img = `http://rkrvzzlak.hd-bkt.clouddn.com/${file.key}`;
+      this.$message.success("上传成功!");
+    },
     // 提交表单
     submitForm(formName) {
       this.$refs[formName].validate(async (valid) => {

@@ -9,13 +9,15 @@ import axios from 'axios'
 import env from "@/api/env";
 import Cookies from 'js-cookie'
 import { Base64 } from 'js-base64'
+import { ElMessage } from 'element-plus'
+
 import {
   getAccessToken,
 } from '@/utils/accessToken'
 
  // create an axios instance
  const service = axios.create({
-  baseURL: 'http://192.168.10.238:5000/api/v1',////process.env.VUE_APP_BASE_API,//'http://192.168.10.238:5000/api/v1',//process.env.VUE_APP_BASE_API, // url = base url + request url
+  baseURL: process.env.VUE_APP_BASE_API,//'http://192.168.10.238:5000/api/v1',//process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })
@@ -37,16 +39,16 @@ function responseFn(response:any){
   console.log(response,'2222')
 
   const res = response.data
-  if(!res.code){
-    return response.data
-  }
+  // if(!res.code){
+  //   return response.data
+  // }
   // if the custom code is not 20000, it is judged as an error.
   if (res.code !== 200) {
-    // Message({
-    //   message: res.msg || 'Error',
-    //   type: 'error',
-    //   duration: 5 * 1000
-    // })
+    ElMessage({
+      message: res.msg || 'Error',
+      type: 'error',
+      duration: 5 * 1000
+    })
     console.log('res.msg ',res.msg )
     return Promise.reject(new Error(res.message || 'Error'))
   } else {

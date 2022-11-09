@@ -9,6 +9,7 @@
 import { createStore, Store } from "vuex"
 import { InjectionKey } from 'vue'
 import {RootStateTypes} from './interface'
+import createPersistedState from "vuex-persistedstate";
 
 import getters from './getters'
 const files = require.context('./modules', false, /\.ts$/)
@@ -20,7 +21,16 @@ files.keys().forEach((key:string) => {
 Object.keys(modules).forEach((key) => {
   modules[key]['namespaced'] = true
 })
-// console.log(modules)
+ /* vuex数据持久化配置 */
+ const plugins = [
+   //@ts-nocheck
+  createPersistedState({
+    // 存储方式：localStorage、sessionStorage、cookies
+    storage: window.sessionStorage,
+    // 存储的 key 的key值
+    key: "store",
+  })
+]
 // 创建一个新的 store 实例
 export const store = createStore<RootStateTypes>({
   state: {
@@ -34,6 +44,7 @@ export const store = createStore<RootStateTypes>({
   },
   modules,
   getters,
+  // plugins
 
 
 })
