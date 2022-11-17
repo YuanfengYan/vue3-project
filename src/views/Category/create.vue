@@ -74,7 +74,7 @@ export default {
     },
     // 上传图片成功回调
     handleUploadSuccess(file) {
-      this.ruleForm.img = `http://rkrvzzlak.hd-bkt.clouddn.com/${file.key}`;
+      this.ruleForm.img = `https://qiniu.kananana.cn/${file.key}`;
       this.$message.success("上传成功!");
     },
     // 提交表单

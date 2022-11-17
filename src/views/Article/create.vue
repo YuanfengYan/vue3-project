@@ -50,7 +50,11 @@
           @imgAdd="$imgAdd"
           @imgDel="$imgDel"
         /> -->
-        <v-md-editor v-model="ruleForm.content" height="400px"></v-md-editor>
+        <v-md-editor
+          :include-level="[2, 3]"
+          v-model="ruleForm.content"
+          height="400px"
+        ></v-md-editor>
       </el-form-item>
 
       <el-form-item>
@@ -77,7 +81,7 @@ export default {
       ruleForm: {
         title: "",
         description: "",
-        img_url: "https://cdn.boblog.com/FiYpNK69ZXxQdjbspW6B6cdkATbF",
+        img_url: "",
         seo_keyword: "",
         status: 1,
         sort_order: 1,
@@ -128,7 +132,7 @@ export default {
     },
     // 上传图片成功回调
     handleUploadSuccess(file) {
-      this.ruleForm.img_url = `http://rkrvzzlak.hd-bkt.clouddn.com/${file.key}`;
+      this.ruleForm.img_url = `https://qiniu.kananana.cn/${file.key}`;
       this.$message.success("上传成功!");
     },
     // 编辑器删除图片回调

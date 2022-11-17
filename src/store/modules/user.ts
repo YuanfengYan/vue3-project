@@ -64,9 +64,13 @@ const UserModule: Module<UserState, RootStateTypes> = {
           //   name:'admin',
           //   pass:'admin'
           // })
+          // const data  = await loginApi2({
+          //   email:'yanyuanfeng_sspu@163.com',
+          //   password:'www.14020'
+          // })
           const data  = await loginApi2({
-            email:'yanyuanfeng_sspu@163.com',
-            password:'www.14020'
+            email:userInfo.name,
+            password:userInfo.pass
           })
           console.log('loginApi',data)
           const accessToken =  data.data[tokenName]
