@@ -75,7 +75,15 @@ function responseErrorFn(error:any){
 //  service.defaults.timeout = env.gateway_timeout;
 service.interceptors.response.use(responseFn, responseErrorFn);
 service.interceptors.request.use(function(config) {
+  //  if(/^http/.test((config as {[srt:string]:any}).url)){
+  //   const match = (config.url as string).match(/https?:\/\/[a-zA-Z0-9.]*\//)
+  //   if(match){
+  //     config.baseURL = match[0]
+  //     config.url = config.url?.replace(config.baseURL as string,'')
+  //   }
+  //  }
    return sign(config);
+
  });
 
  export default {

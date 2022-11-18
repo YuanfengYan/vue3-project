@@ -96,13 +96,14 @@ const UserModule: Module<UserState, RootStateTypes> = {
             // )
           }
         },
-        async getUserInfo({ commit, state }) {
+        async getUserInfo({ commit,dispatch, state }) {
           const { data } = await getUserInfo2()
           if (!data) {
             // Vue.prototype.$baseMessage('验证失败，请重新登录...', 'error')
+            await dispatch('resetAccessToken')
+            window.location.reload()
             return false
           }
-          console.log('eeee',data)
           const { permissions, nickname,id } = data
           if (permissions && nickname && Array.isArray(permissions)) {
             commit('setPermissions', permissions)

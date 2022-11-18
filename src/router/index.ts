@@ -287,6 +287,17 @@ export const asyncRoutes = [
           affix: true,
         },
       },
+      {
+        path: 'imgaeupload',
+        name: 'imageUpload',
+        hidden: false,
+        component: () => import('@/views/Article/imageupload.vue'),
+        meta: {
+          title: '七牛图片上传',
+          icon: 'list',
+          affix: true,
+        },
+      },
     ],
   }
 ];
