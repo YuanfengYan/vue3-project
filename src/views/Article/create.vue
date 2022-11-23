@@ -84,7 +84,7 @@ export default {
         img_url: "",
         seo_keyword: "",
         status: 1,
-        sort_order: 1,
+        sort_order: 10,
         admin_id: "",
         category_id: "",
         content: "",
