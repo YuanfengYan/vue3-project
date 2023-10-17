@@ -92,85 +92,85 @@ export const asyncRoutes = [
       },
     ],
   },
-  { 
+  // { 
     
-    path: '/exp',
-    component: Layout,
-    redirect: 'noRedirect',
-    alwaysShow: true,
-    meta: { title: 'Demo', icon: 'platform', permissions: ['admin'] },
-    children: [
-      {
-        path: 'permissions',
-        name: 'permissions',
-        component: () => import('@/views/Example/Permissions/index.vue'),
-        meta: {
-          title: '权限分配',
-          icon: 'lock',
-          affix: true,
-        },
-      },
-      {
-        path: 'earth',
-        name: 'earth',
-        component: () => import('@/views/Example/Earth/index.vue'),
-        meta: {
-          title: 'Cesium地球',
-          icon: 'location',
-          affix: true,
-        },
-      },
-      {
-        path: 'book',
-        name: 'book',
-        component: () => import('@/views/Example/Book/index.vue'),
-        meta: {
-          title: '增删改查',
-          icon: 'list',
-          affix: true,
-        },
-      },
-      {
-        path: 'websocket',
-        name: 'websocket',
-        component: () => import('@/views/Example/Websocket/index.vue'),
-        meta: {
-          title: 'Websocket',
-          icon: 'list',
-          affix: true,
-        },
-      },
-      {
-        path: 'svgAvatar',
-        name: 'svgAvatar',
-        component: () => import('@/views/Example/SvgAvatar/index.vue'),
-        meta: {
-          title: 'SvgAvatar',
-          icon: 'list',
-          affix: true,
-        },
-      },
-      {
-        path: 'GSAP',
-        name: 'GSAP',
-        component: () => import('@/views/Example/GSAP/index.vue'),
-        meta: {
-          title: 'GSAP',
-          icon: 'list',
-          affix: true,
-        },
-      },
-    ],
-  },
-  { 
+  //   path: '/exp',
+  //   component: Layout,
+  //   redirect: 'noRedirect',
+  //   alwaysShow: true,
+  //   meta: { title: 'Demo', icon: 'platform', permissions: ['admin'] },
+  //   children: [
+  //     {
+  //       path: 'permissions',
+  //       name: 'permissions',
+  //       component: () => import('@/views/Example/Permissions/index.vue'),
+  //       meta: {
+  //         title: '权限分配',
+  //         icon: 'lock',
+  //         affix: true,
+  //       },
+  //     },
+  //     {
+  //       path: 'earth',
+  //       name: 'earth',
+  //       component: () => import('@/views/Example/Earth/index.vue'),
+  //       meta: {
+  //         title: 'Cesium地球',
+  //         icon: 'location',
+  //         affix: true,
+  //       },
+  //     },
+  //     {
+  //       path: 'book',
+  //       name: 'book',
+  //       component: () => import('@/views/Example/Book/index.vue'),
+  //       meta: {
+  //         title: '增删改查',
+  //         icon: 'list',
+  //         affix: true,
+  //       },
+  //     },
+  //     {
+  //       path: 'websocket',
+  //       name: 'websocket',
+  //       component: () => import('@/views/Example/Websocket/index.vue'),
+  //       meta: {
+  //         title: 'Websocket',
+  //         icon: 'list',
+  //         affix: true,
+  //       },
+  //     },
+  //     {
+  //       path: 'svgAvatar',
+  //       name: 'svgAvatar',
+  //       component: () => import('@/views/Example/SvgAvatar/index.vue'),
+  //       meta: {
+  //         title: 'SvgAvatar',
+  //         icon: 'list',
+  //         affix: true,
+  //       },
+  //     },
+  //     {
+  //       path: 'GSAP',
+  //       name: 'GSAP',
+  //       component: () => import('@/views/Example/GSAP/index.vue'),
+  //       meta: {
+  //         title: 'GSAP',
+  //         icon: 'list',
+  //         affix: true,
+  //       },
+  //     },
+  //   ],
+  // },
+  // { 
     
-    path: '/test',
-    component: Layout,
-    redirect: 'noRedirect',
-    alwaysShow: true,
-    meta: { title: '测试', icon: 'platform', permissions: ['admin'] },
-    children: vueDemoChildren,
-  },
+  //   path: '/test',
+  //   component: Layout,
+  //   redirect: 'noRedirect',
+  //   alwaysShow: true,
+  //   meta: { title: '测试', icon: 'platform', permissions: ['admin'] },
+  //   children: vueDemoChildren,
+  // },
   {
     path:'/category',
     component: Layout,

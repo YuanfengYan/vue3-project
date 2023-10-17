@@ -10,8 +10,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import VueRouter from "./router/index"
 // VueCesium 地球相关
-import VueCesium from 'vue-cesium'
-import 'vue-cesium/dist/index.css'
+// import VueCesium from 'vue-cesium'
+// import 'vue-cesium/dist/index.css'
 // ui框架
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -61,12 +61,12 @@ app.provide('user', 'administrator')
 // @ts-ignore
 app.use(MyDrag)
 app.use(VMdEditor)
-app.use(i18n)
-app.use(VueCesium,{
-  cesiumPath: "./Cesium/Cesium.js",
-  accessToken:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZmFiZjQxYS0xNjk0LTQ4MjEtYjFiNy02OGFlYjdhMTQxMDkiLCJpZCI6NTgyODQsImlhdCI6MTYyMzA2NTI0NH0.Wsji8RvxIbzVjlJfDuaw2jh5a_yHmNXUhBZNQAr2HkA"
-}).use(store).use(ElementPlus).use(VueRouter).mount('#app')
+app.use(i18n).use(store).use(ElementPlus).use(VueRouter).mount('#app')
+// app.use(VueCesium,{
+//   cesiumPath: "./Cesium/Cesium.js",
+//   accessToken:
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZmFiZjQxYS0xNjk0LTQ4MjEtYjFiNy02OGFlYjdhMTQxMDkiLCJpZCI6NTgyODQsImlhdCI6MTYyMzA2NTI0NH0.Wsji8RvxIbzVjlJfDuaw2jh5a_yHmNXUhBZNQAr2HkA"
+// }).
 
 // @ts-ignore
 window.app = app
