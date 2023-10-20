@@ -71,7 +71,6 @@ function responseErrorFn(error:any){
  * api请求的初始化
  * @type {string}
  */
-//  service.defaults.baseURL = env.gateway_url;
 //  service.defaults.timeout = env.gateway_timeout;
 service.interceptors.response.use(responseFn, responseErrorFn);
 service.interceptors.request.use(function(config) {
